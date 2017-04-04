@@ -1,5 +1,13 @@
 package blackjack.model;
 
 public class Chip {
-	//Implementation of Chip here
+	private int value = 0;
+	
+	public Chip(int val) {
+		value = val;
+	}
+	
+	public int getValue() {
+		return value;
+	}
 }
