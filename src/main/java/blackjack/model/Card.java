@@ -10,13 +10,13 @@ public class Card {
 	final int KING = 13;
 	final int ACE = 1;
 	
-	final static String DIAMONDS = "d";
-	final static String CLUBS = "c";
-	final static String HEARTS = "h";
-	final static String SPADES = "s";
+	final static String DIAMONDS = "diamond";
+	final static String CLUBS = "club";
+	final static String HEARTS = "heart";
+	final static String SPADES = "spade";
 	
-	final static char BLACK = 'b';
-	final static char RED = 'r';
+	final static String BLACK = "black";
+	final static String RED = "red";
 			
 	
 	public Card(int num, String suit) throws Exception {
@@ -43,7 +43,7 @@ public class Card {
 		return suit;
 	}
 	
-	public char getColor() {
+	public String getColor() {
 		switch (suit) {
 			case DIAMONDS: return RED;
 			case CLUBS: return BLACK; 
