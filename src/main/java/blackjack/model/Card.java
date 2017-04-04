@@ -8,7 +8,7 @@ public class Card {
 	final int JACK = 11;
 	final int QUEEN = 12;
 	final int KING = 13;
-	final int ACE = 14;
+	final int ACE = 1;
 	
 	final String DIAMONDS = "d";
 	final String CLUBS = "c";
@@ -21,7 +21,7 @@ public class Card {
 	
 	public Card(int num, String suit) throws Exception {
 		if (isProperNumber(num)) number = num;
-		else throw new Exception("Card number must be between 1 and 14 (Between 1-ACE)");
+		else throw new Exception("Card number must be between 1 and 13 (Between ACE-KING)");
 		
 		if (isProperSuit(suit)) this.suit = suit;
 		else throw new Exception("Card suit must be either 'DIAMONDS', 'CLUBS', 'HEARTS', or 'SPADES'.");
@@ -56,7 +56,7 @@ public class Card {
 	//----Helper methods---------------------------------------------------------------------------------
 	
 	public boolean isProperNumber(int num) {
-		if (num >= 1 && num <= 14) return true;
+		if (num >= 1 && num <= 13) return true;
 		else return false;
 	}
 	
