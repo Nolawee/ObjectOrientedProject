@@ -55,12 +55,12 @@ public class Card {
 
 	//----Helper methods-----------------------------------------------------------------------------------------------------------
 	
-	public boolean isProperNumber(int num) {
+	private boolean isProperNumber(int num) {
 		if (num >= 1 && num <= 13) return true;
 		else return false;
 	}
 	
-	public boolean isProperSuit(String suit) {
+	private boolean isProperSuit(String suit) {
 		if (suit.equals(DIAMONDS) || suit.equals(CLUBS) || suit.equals(HEARTS) || suit.equals(SPADES))
 			return true;
 		else
