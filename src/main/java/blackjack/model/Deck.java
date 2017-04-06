@@ -6,7 +6,7 @@ public class Deck {
 	
 	/*
 	 * Instantiates a standard deck of cards with
-	 * 52 cards and 13 cards for each of the 4 suits
+	 * 52 cards; 13 cards for each of the 4 suits
 	 * (Diamonds, Clubs, Hearts, and Spades).
 	 */
 	public Deck() {
@@ -45,39 +45,21 @@ public class Deck {
 	
 	//----Helper methods---------------------------------------------------
 	
-	private Card[] createStandardDeck() {
-		Card[] newCards = new Card[52];
-		String suit = Card.DIAMONDS;
-		int i = 0;
-		
-		try {
-			//Add all Diamond cards
-			for (int j = 1; j <= 13; j++) {
-				newCards[i] = new Card(j, suit);
-				i++;
-			}
-			//Add all Club cards
-			suit = Card.CLUBS;
-			for (int j = 1; j <= 13; j++) {
-				newCards[i] = new Card(j, suit);
-				i++;
-			}
-			//Add all Heart cards
-			suit = Card.HEARTS;
-			for (int j = 1; j <= 13; j++) {
-				newCards[i] = new Card(j, suit);
-				i++;
-			}
-			//Add all Spade cards
-			suit = Card.SPADES;
-			for (int j = 1; j <= 13; j++) {
-				newCards[i] = new Card(j, suit);
-				i++;
-			}
+	private Card[] createStandardDeck() { 
+	    Card[] newCards = new Card[52];
+	    int i = 0;
+	    
+	    try { 
+			for(String suit: new String[]{Card.DIAMONDS, Card.CLUBS, Card.HEARTS, Card.SPADES})
+			    for (int j = 1; j <= 13; j++) {
+			        newCards[i] = new Card(j, suit);
+			        i++;
+			    }
+			    
 		} 
 		catch (Exception e) {
 			System.out.println("Oops! You can't make a Card that way: " + e.getMessage());
-			System.out.println("An empty Deck was just returned.");
+			System.out.println("An unfinished Deck was just returned.");
 		}
 		
 		return newCards;
@@ -89,6 +71,8 @@ public class Deck {
 		}
 	}
 	
+	
+	//----Temp main method for testing------------------------------------------------------
 	
 //	public static void main(String[] args) {
 //		Deck d = new Deck();
