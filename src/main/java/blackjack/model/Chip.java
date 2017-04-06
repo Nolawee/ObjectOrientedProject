@@ -32,7 +32,7 @@ public class Chip {
         return chips;
     }
 	
-	//----Main method for testing------------------------------------------------------
+	//----Temp main method for testing--------------------------------------------------
 	
 //	public static void main(String[] args) {
 //	    Map chips = divyUpChips(1100732);
