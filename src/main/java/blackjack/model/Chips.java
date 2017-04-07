@@ -3,14 +3,14 @@ package blackjack.model;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/*
- * Poker chips represented as a Map that maintains 
- * a count of how many of each chip is possessed. 
- * (Mapping: chip's value -> number of those chips)
- */
 public class Chips { 
 	private Map<Integer, Integer> chips;
 	
+	/*
+	 * Poker chips represented as a Map that maintains 
+	 * a count of how many of each chip is possessed. 
+	 * (Mapping: chip's value -> number of those chips)
+	 */
 	public Chips(int amount) { 
 		chips = divyUpChips(amount);
 	}
