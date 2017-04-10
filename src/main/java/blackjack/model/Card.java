@@ -5,10 +5,10 @@ public class Card {
 	private String suit;
 	private boolean isFaceUp = false;
 	
-	final int JACK = 11;
-	final int QUEEN = 12;
-	final int KING = 13;
-	final int ACE = 1;
+	final static int JACK = 11;
+	final static int QUEEN = 12;
+	final static int KING = 13;
+	final static int ACE = 1;
 	
 	final static String DIAMONDS = "diamond";
 	final static String CLUBS = "club";
