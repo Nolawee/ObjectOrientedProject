@@ -6,8 +6,13 @@ public abstract class Player {
     private int gamesWon;
     private Card[] hand;
     private Card[] splitHand; //only used after choosing to "split"
+    private Chips chips;
     
     /*abstract public void takeTurn();*/ //NOT USED because of TurnManager. 
                                          //Leaving this here temporarily to alert our team
-                                         //because this varies from our class diagram.              
+                                         //because this varies from our class diagram. 
+    
+    public Chips getChips() {
+        return chips;
+    }
 }
