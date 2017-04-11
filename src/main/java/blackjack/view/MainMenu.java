@@ -1,0 +1,34 @@
+package blackjack.view;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+public class MainMenu {
+    private String rules = getRules();
+	//Implementation of MainMenu here
+    
+    
+    //----Helper methods--------------------------------------------------------------------------------
+    
+    public static String getRules() {
+        String rules = "No rules here! Was there an error?";
+        try {
+            rules = new String(Files.readAllBytes(Paths.get("./src/main/resources/BlackjackRules.txt")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return rules;
+    }
+    
+    //----Temp main method for testing------------------------------------------------------------------
+    
+//    public static void main(String[] args) {
+//        String rulez = getRules();
+//        System.out.println(rulez);
+//    }
+}
