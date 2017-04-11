@@ -9,7 +9,7 @@ public class Deck {
 	 * 52 cards; 13 cards for each of the 4 suits
 	 * (Diamonds, Clubs, Hearts, and Spades).
 	 */
-	public Deck() throws Exception {
+	public Deck() {
 		cards = createStandardDeck();
 		cardsUsed = 0;
 	}
@@ -45,21 +45,21 @@ public class Deck {
 	
 	//----Helper methods---------------------------------------------------
 	
-	private Card[] createStandardDeck() throws Exception { 
+	private Card[] createStandardDeck() { 
 	    Card[] newCards = new Card[52];
 	    int i = 0;
 	    
 	    try { 
 			for(String suit: new String[]{Card.DIAMONDS, Card.CLUBS, Card.HEARTS, Card.SPADES})
-			    for (int j = 1; j <= 13; j++) {
+			    for (int j = Card.ACE; j <= Card.KING; j++) {
 			        newCards[i] = new Card(j, suit);
 			        i++;
 			    }
 			    
 		} 
 		catch (Exception e) {
-			throw new Exception("Oops! You can't make a Card that way: " + e.getMessage() + 
-			                    "An unfinished Deck was just returned."); 
+			System.out.println("Oops! You can't make a Card that way: " + e.getMessage() + 
+			                   "An unfinished Deck was just returned."); 
 		}
 		
 		return newCards;
@@ -74,9 +74,9 @@ public class Deck {
 	
 	//----Temp main method for testing------------------------------------------------------
 	
-//	public static void main(String[] args) {
+//	public static void main(String[] args) throws Exception {
 //		Deck d = new Deck();
-//		d.shuffle();
+//		//d.shuffle();
 //		d.printDeck();
 //		
 //		Card dealt = d.deal();
