@@ -36,6 +36,10 @@ public class Chips {
         else throw new IllegalStateException("That chip is not among the current chips: " + chipVal);
 	}
 	
+	public boolean isEmpty() {
+	    return chips.isEmpty();
+	}
+	
 	private static Map<Integer, Integer> divyUpChips(int amount) { 
         Map<Integer, Integer> chips = new LinkedHashMap<Integer, Integer>();
         int[] chipValues = new int[]{50000, 20000, 5000, 500, 100, 50, 25, 10, 5, 1}; //These chips are fairly arbitrary 
