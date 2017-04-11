@@ -2,12 +2,12 @@ package blackjack.model;
 
 public class TurnManager {
     private State currentState;
-    private HumanPlayer currentHuman;
+    private Player currentPlayer;
     private Dealer currentDealer;
     
-    public TurnManager(HumanPlayer human, Dealer dealer) {
+    public TurnManager(Player player, Dealer dealer) {
         currentState = new BettingPhase(); //Every turn starts with a betting phase
-        currentHuman = human;
+        currentPlayer = player;
         currentDealer = dealer;
     }
     
@@ -15,8 +15,8 @@ public class TurnManager {
         currentState = s;
     }
     
-    public void setHumanPlayer(HumanPlayer human) {
-        currentHuman = human;
+    public void setPlayer(Player player) {
+        currentPlayer = player;
     }
     
     public void setDealer(Dealer dealer) {
@@ -24,6 +24,6 @@ public class TurnManager {
     }
     
     public void takeTurn() {
-        currentState.takeTurn(this, currentHuman, currentDealer);
+        currentState.takeTurn(this, currentPlayer, currentDealer);
     }
 }
