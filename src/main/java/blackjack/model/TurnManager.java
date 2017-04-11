@@ -23,7 +23,7 @@ public class TurnManager {
         currentDealer = dealer;
     }
     
-    public void play() {
-        currentState.play(this, currentHuman, currentDealer);
+    public void takeTurn() {
+        currentState.takeTurn(this, currentHuman, currentDealer);
     }
 }

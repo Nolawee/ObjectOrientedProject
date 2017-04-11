@@ -1,5 +1,5 @@
 package blackjack.model;
 
 public interface State {
-    void play(TurnManager wrapper, HumanPlayer human, Dealer dealer);
+    public void takeTurn(TurnManager wrapper, HumanPlayer human, Dealer dealer);
 }
