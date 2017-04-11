@@ -33,7 +33,7 @@ public class Chips {
             chips.put(chipVal, currentChipCount--);
             return chipVal;
         }
-        else throw new IllegalStateException("That chip is not among the current chips.");
+        else throw new IllegalStateException("That chip is not among the current chips: " + chipVal);
 	}
 	
 	private static Map<Integer, Integer> divyUpChips(int amount) { 
