@@ -1,5 +1,5 @@
 package blackjack.controller;
 
-public class GameLoader {
-	//Loads a game (using the Momento design pattern?)
+public class GameLoader { //Shouldn't exist. Replace with GameOriginator
+	
 }
