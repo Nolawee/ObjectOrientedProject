@@ -1,18 +1,24 @@
 package blackjack.model;
 
+import java.util.ArrayList;
+
 public class TurnManager {
+    //TODO: The actions performed on these players are meant to affect
+    //      the real players held in Table. If Java is doing pass-by-value
+    //      here, this will NOT be the case, and a refactor will be needed
+    //      to propagate the changes up to Table.
     private State currentState;
     private Player currentPlayer;
     private Dealer currentDealer;
-    private Player[] players;
+    private ArrayList<Player> players;
     private int playerIndex;
     
-    public TurnManager(Player[] everyone, Dealer dealer) {
+    public TurnManager(Table tableWrapper) {
         currentState = new BettingPhase(); //Every turn starts with a betting phase
-        currentPlayer = everyone[0];
-        currentDealer = dealer;
-        players = everyone;
-        playerIndex = 0;
+        playerIndex = 0; //Start with the first player in the list
+        currentPlayer = tableWrapper.getPlayers().get(playerIndex); 
+        currentDealer = tableWrapper.getDealer();
+        players = tableWrapper.getPlayers();
     }
     
     public void setState(State s) {
@@ -29,10 +35,10 @@ public class TurnManager {
     
     public void nextPlayer() {
         try {
-            setPlayer(players[playerIndex++]);
+            setPlayer(players.get(playerIndex++));
             playerIndex++;
         } catch (IndexOutOfBoundsException e) {
-            setPlayer(players[0]);
+            setPlayer(players.get(0));
             playerIndex = 0;
         }
     }
