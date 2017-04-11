@@ -9,7 +9,7 @@ public class Deck {
 	 * 52 cards; 13 cards for each of the 4 suits
 	 * (Diamonds, Clubs, Hearts, and Spades).
 	 */
-	public Deck() {
+	public Deck() throws Exception {
 		cards = createStandardDeck();
 		cardsUsed = 0;
 	}
@@ -45,7 +45,7 @@ public class Deck {
 	
 	//----Helper methods---------------------------------------------------
 	
-	private Card[] createStandardDeck() { 
+	private Card[] createStandardDeck() throws Exception { 
 	    Card[] newCards = new Card[52];
 	    int i = 0;
 	    
@@ -58,8 +58,8 @@ public class Deck {
 			    
 		} 
 		catch (Exception e) {
-			System.out.println("Oops! You can't make a Card that way: " + e.getMessage());
-			System.out.println("An unfinished Deck was just returned.");
+			throw new Exception("Oops! You can't make a Card that way: " + e.getMessage() + 
+			                    "An unfinished Deck was just returned."); 
 		}
 		
 		return newCards;
