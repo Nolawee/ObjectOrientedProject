@@ -27,6 +27,15 @@ public class Chips {
 	    chips.put(chipVal, currentChipCount++);
 	}
 	
+	public void combineChips(Chips chips) {
+	    Map<Integer,Integer> newChips = chips.getChips();
+	    for (int chipVal: newChips.keySet()) {
+	        for (int i = 0; i < newChips.get(chipVal); i++) {
+	            addChip(chipVal);
+	        }
+	    }
+	}
+	
 	public int takeChip(int chipVal) throws IllegalStateException {
         if (chips.containsKey(chipVal)) {
             int currentChipCount = chips.get(chipVal);
@@ -44,10 +53,10 @@ public class Chips {
         Map<Integer, Integer> chips = new LinkedHashMap<Integer, Integer>();
         int[] chipValues = new int[]{50000, 20000, 5000, 500, 100, 50, 25, 10, 5, 1}; //These chips are fairly arbitrary 
         
-        for (int val: chipValues) {
-            int numChips = amount/val;
-            chips.put(val, numChips);
-            amount = amount - numChips*val;
+        for (int chipVal: chipValues) {
+            int numChips = amount/chipVal;
+            chips.put(chipVal, numChips);
+            amount = amount - numChips*chipVal;
         }
         
         chips.values().removeIf(v -> v==0);
