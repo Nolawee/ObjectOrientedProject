@@ -3,10 +3,6 @@ package blackjack.model;
 import java.util.ArrayList;
 
 public class TurnManager {
-    //TODO: The actions performed on these players are meant to affect
-    //      the real players held in Table. If Java is doing pass-by-value
-    //      here, this will NOT be the case, and a refactor will be needed
-    //      to propagate the changes up to Table.
     private State currentState;
     private Player currentPlayer;
     private Dealer currentDealer;
