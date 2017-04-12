@@ -15,8 +15,8 @@ public class TurnManager {
     
     public TurnManager(Table tableWrapper) {
         currentState = new BettingPhase(); //Every turn starts with a betting phase
-        playerIndex = 0; //Start with the first player in the list
-        currentPlayer = tableWrapper.getPlayers().get(playerIndex); 
+        currentPlayer = tableWrapper.getPlayers().get(0); 
+        playerIndex = 0; 
         currentDealer = tableWrapper.getDealer();
         players = tableWrapper.getPlayers();
     }
