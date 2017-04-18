@@ -7,9 +7,11 @@ public class HumanPlayer extends Player {
     Chips currentBet; //We'll be representing bets with chips themselves, not an int.
     Chips chips;
     
-    public HumanPlayer(int startingMoney) {
+    public HumanPlayer(String name, int startingMoney) {
+        setName(name);
         turnsWon = 0;
         this.chips = new Chips(startingMoney);
+        isPlaying = false;
     }
     
     //Implementation of HumanPlayer here

@@ -10,7 +10,7 @@ public abstract class Player {
     private ArrayList<Card> hand;
     protected Chips chips;
     private Chips currentBet; //We'll be representing bets with chips themselves, not an int.
-    private boolean isPlaying;
+    protected boolean isPlaying;
     
     /*abstract public void takeTurn();*/ //NOT USED because TurnManager handles taking turns. 
                                          //Leaving this here temporarily to alert our team

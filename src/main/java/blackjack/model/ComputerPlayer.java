@@ -5,9 +5,11 @@ public class ComputerPlayer extends Player {
     Chips chips;
 
     
-    public ComputerPlayer(int startingMoney) {
+    public ComputerPlayer(String name, int startingMoney) {
+        setName(name);
         turnsWon = 0;
         this.chips = new Chips(startingMoney);
+        isPlaying = false;
     }
     
     /*
