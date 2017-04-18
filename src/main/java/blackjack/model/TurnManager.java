@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class TurnManager {
     private State currentState;
+    private ArrayList<Player> players;
     private Player currentPlayer;
     private Dealer currentDealer;
-    private ArrayList<Player> players;
     private int playerIndex;
     
-    public TurnManager(Table tableWrapper) {
+    public TurnManager(ArrayList<Player> everyone, Dealer dealer) {
         currentState = new BettingPhase(); //Every turn starts with a betting phase
-        currentPlayer = tableWrapper.getPlayers().get(0); 
+        players = everyone;
+        currentPlayer = players.get(0);
         playerIndex = 0; 
-        currentDealer = tableWrapper.getDealer();
-        players = tableWrapper.getPlayers();
+        currentDealer = dealer;
     }
     
     public void setState(State s) {
