@@ -15,7 +15,7 @@ public class Table implements Serializable {
     public Table(ArrayList<Player> players, Dealer dealer) {
         this.players = players;
         this.dealer = dealer;
-        tm = new TurnManager(this);
+        tm = new TurnManager(players, dealer);
     }
     
     public ArrayList<Player> getPlayers() {
