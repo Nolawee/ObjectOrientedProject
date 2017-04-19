@@ -15,8 +15,8 @@ public class PlayHandPhase implements State {
         //
         //      The code below assumes we're using just a command-line interface.
         
+        dealer.dealStartingHands(player);
         while (player.isPlaying && !player.hasBusted()) {
-            dealer.dealStartingHands(player);
             //TODO: code the exchange between player and dealer here.
             //      This phase of the turn ends when the player chooses 
             //      "stand" or hits too many times and goes bust. 
