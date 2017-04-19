@@ -17,6 +17,14 @@ public class BettingPhase implements State {
         //
         //      The code below assumes we're using just a command-line interface.
         
+        placePlayerBet(player);
+    }
+    
+    /*
+     * Takes in input from the user to place their bet on the forthcoming hand.
+     * Assumes our view is a command-line interface.
+     */
+    public void placePlayerBet(Player player) {
         int bet;
         System.out.println("How much would you like to bet on this hand? When done entering chips to bet, enter -1.");
         //This next printout won't be needed when the view is always showing the chips
@@ -36,7 +44,7 @@ public class BettingPhase implements State {
                     player.bet(bet);
                 }    
             } catch (Exception e) {
-                System.out.println("You don't have a chip of value: " + playerInput + ". Try again: ");    
+                System.out.println("You don't have a chip of value: " + playerInput + ". Try again.");    
             }
         }  
         scan.close();
