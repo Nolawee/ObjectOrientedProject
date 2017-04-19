@@ -15,6 +15,7 @@ public class PlayHandPhase implements State {
         //
         //      The code below assumes we're using just a command-line interface.
         
+        dealer.shuffleDeck();
         dealer.dealStartingHands(player);
         while (player.isPlaying && !player.hasBusted()) {
             //TODO: code the exchange between player and dealer here.
