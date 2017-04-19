@@ -27,7 +27,9 @@ public class Chips {
 	    chips.put(chipVal, currentChipCount++);
 	}
 	
-	public void combineChips(Chips chips) {
+	//TODO: Make new method "acceptWinningBet"? In Player class?
+	//        acceptWinningBet(Chips bet, int multiplier)
+	public void combineChips(Chips chips) { 
 	    Map<Integer,Integer> newChips = chips.getChips();
 	    for (int chipVal: newChips.keySet()) {
 	        for (int i = 0; i < newChips.get(chipVal); i++) {
@@ -62,13 +64,19 @@ public class Chips {
         chips.values().removeIf(v -> v==0);
         return chips;
     }
+	
+	public void printChips() {
+	    getChips().forEach((k, v) -> {
+	        System.out.println("" + v + " chips worth $" + k);
+	    });
+	}
 
 	
 	//----Temp main method for testing--------------------------------------------------
 	
-//	public static void main(String[] args) {
-//	    Map chips = divyUpChips(1100732);
-//	    
-//	    System.out.println(chips);
-//	}
+	public static void main(String[] args) {
+	    Chips chips = new Chips(1100732);
+	    
+	    chips.printChips();
+	}
 }
