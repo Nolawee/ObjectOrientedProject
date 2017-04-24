@@ -28,6 +28,14 @@ public class Table implements Serializable {
         return dealer;
     }
     
+    /*
+     * The central method of this game.
+     * Players take turns playing Blackjack
+     * against a single dealer until they 
+     * successively run out of chips and get
+     * removed from play. Game ends when all
+     * players have gone broke.
+     */
     private void playBlackjack() {
         while (!players.isEmpty()) {
             tm.takeTurn();
