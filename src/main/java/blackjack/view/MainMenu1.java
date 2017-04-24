@@ -18,11 +18,14 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Choice;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainMenu1 {
 
 	private JFrame frame;
 	private JTextField textFieldSetChip;
+	private JTextField textFieldSetComp;
 
 	/**
 	 * Launch the application.
@@ -55,6 +58,7 @@ public class MainMenu1 {
 		frame.getContentPane().setBackground(new Color(0, 102, 0));
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		
+		// ---- Main Menu ---- //
 		
 		JPanel panelMainMenu = new JPanel();
 		panelMainMenu.setBackground(new Color(0, 102, 0));
@@ -128,13 +132,47 @@ public class MainMenu1 {
 		textFieldSetChip.setBounds(190, 250, 200, 60);
 		
 		Border rounded = new LineBorder(new Color(255,204,0),2);
-		Border empty = new EmptyBorder(0,0,0,20);
+		Border emptySetChip = new EmptyBorder(0,0,0,20);
 		
 		textFieldSetChip.setBorder(rounded);
 		
-		textFieldSetChip.setBorder(BorderFactory.createCompoundBorder(rounded,empty));
+		textFieldSetChip.setBorder(BorderFactory.createCompoundBorder(rounded,emptySetChip));
 		panelNewGame.add(textFieldSetChip);
 		textFieldSetChip.setColumns(10);
+		
+		JButton btnSetCompUp = new JButton("▲");
+		btnSetCompUp.setForeground(new Color(255, 204, 0));
+		btnSetCompUp.setBounds(560, 245, 60, 50);
+		btnSetCompUp.setContentAreaFilled(false);
+		btnSetCompUp.setOpaque(false);
+		btnSetCompUp.setBorderPainted(false);
+		panelNewGame.add(btnSetCompUp);
+		
+		JButton btnSetCompDown = new JButton("▼");
+		btnSetCompDown.setOpaque(false);
+		btnSetCompDown.setForeground(new Color(255, 204, 0));
+		btnSetCompDown.setContentAreaFilled(false);
+		btnSetCompDown.setBorderPainted(false);
+		btnSetCompDown.setBounds(560, 265, 60, 50);
+		panelNewGame.add(btnSetCompDown);
+		
+		textFieldSetComp = new JTextField();
+		textFieldSetComp.setText("0");
+		textFieldSetComp.setHorizontalAlignment(SwingConstants.RIGHT);
+		textFieldSetComp.setForeground(new Color(255, 204, 0));
+		textFieldSetComp.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		textFieldSetComp.setColumns(10);
+		textFieldSetComp.setBackground(new Color(0, 51, 0));
+		textFieldSetComp.setBounds(410, 250, 200, 60);
+		
+		Border emptySetComp = new EmptyBorder(0,0,0,30);
+		
+		textFieldSetComp.setBorder(BorderFactory.createCompoundBorder(rounded,emptySetComp));
+		panelNewGame.add(textFieldSetComp);
+		
+		
+		
+		
 		
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.setOpaque(false);
