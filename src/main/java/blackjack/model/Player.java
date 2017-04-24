@@ -106,6 +106,25 @@ public abstract class Player {
         requestDeal(dealer);
     }
     
+    /*
+     * If the remaining chips can double the current bet, double it.
+     * (This will involve some tricky work because we can't just double
+     *  a number, we have to add chips to the current bet pile. May involve
+     *  adding "change making" method to Chips for returning a set of chips based on
+     *  a number value; e.g. if requesting 100: return 2 50s, or 4 25s, or 1 50 & 2 25s, etc.)
+     *  
+     *  If the double occurs successfully, hit then stand.
+     *  Throw an exception if the remaining chips can't double the bet. 
+     */
+    public void doubleBet(Dealer dealer) throws IllegalStateException {
+        throw new IllegalStateException("Sorry! This method hasn't been implemented yet! Blame your devs."); //Temporary, of course.
+
+//        if (getChips().getTotalValueOfChips() >= currentBet.getTotalValueOfChips()) {
+//            
+//        }
+//        else throw new IllegalStateException("You do not have enough chips to double your bet. Sorry.");
+    }
+    
     public abstract void split(Dealer dealer); //Left abstract because only HumanPlayers "split" right now.
     
     public void stand() {
