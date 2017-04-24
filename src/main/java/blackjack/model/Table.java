@@ -2,6 +2,7 @@ package blackjack.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /*
  * Implement Serializable for writing/loading 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Table implements Serializable {
     private ArrayList<Player> players; 
+    private Stack<Player> brokePlayers; //Keeps track of losing players. At the end of a game, repeatedly "pop" to get Players back in order of 1st place, 2nd place, etc...
     private Dealer dealer;
     private TurnManager tm;
     
@@ -33,11 +35,16 @@ public class Table implements Serializable {
         }
     }
     
+    /*
+     * If a turn causes a player to run out of chips,
+     * remove them from the list of players.
+     */
     private void removeAnyBrokePlayer() { 
-        //If a turn causes a player to run out of chips,
-        //remove them from the list of players.
-        if(player.getTotalMoney() == 0){
-            player.isPlaying() = false;
+        for (Player player : players) {   
+            if (player.getTotalMoney() <= 0){
+                brokePlayers.push(player); //Used so we don't lose player info after removing them
+                players.remove(player);
+            }
         }
     }
     
