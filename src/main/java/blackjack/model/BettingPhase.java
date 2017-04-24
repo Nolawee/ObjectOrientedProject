@@ -19,7 +19,8 @@ public class BettingPhase implements State {
         
         placePlayerBet(player);
     }
-    
+    //I (Jose) am not sure if there is anything I can add to this phase
+    //If we are just doing CLI then this is pretty much all we need already for the betting
     /*
      * Takes in input from the user to place their bet on the forthcoming hand.
      * Assumes our view is a command-line interface.

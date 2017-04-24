@@ -11,6 +11,7 @@ public abstract class Player {
     protected Chips chips;
     private Chips currentBet; //We'll be representing bets with chips themselves, not an int.
     protected boolean isPlaying;
+    protected boolean winner;
     
     /*abstract public void takeTurn();*/ //NOT USED because TurnManager handles taking turns. 
                                          //Leaving this here temporarily to alert our team
@@ -22,6 +23,10 @@ public abstract class Player {
     
     public boolean isPlaying() {
         return isPlaying;
+    }
+
+    public void setPlaying(boolean play){
+        isPlaying = play;
     }
     
     public String getName() {
@@ -76,6 +81,14 @@ public abstract class Player {
     public void bet(int chipVal) throws IllegalStateException {
         int betChip = chips.takeChip(chipVal);
         currentBet.addChip(betChip);
+    }
+
+    public boolean won(){
+        return iswinner;
+    }
+
+    public void setWinner(boolean isWinner){
+        winner = isWinner;
     }
 
     /*

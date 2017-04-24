@@ -13,6 +13,19 @@ public class HumanPlayer extends Player {
         this.chips = new Chips(startingMoney);
         isPlaying = false;
     }
+
+    public int getSplitHandTotal() {
+        int l = splithHand.size();
+        int sum = 0;
+        for(int i=0; i < l; i++) {
+            sum += splitHand.get(i).getNumber();
+        }
+        return sum;
+    }
+
+    public boolean hasBustedSplit() {
+        return getSplitHandTotal() > 21;
+    }
     
     //Implementation of HumanPlayer here
 }

@@ -36,6 +36,9 @@ public class Table implements Serializable {
     private void removeAnyBrokePlayer() { 
         //If a turn causes a player to run out of chips,
         //remove them from the list of players.
+        if(player.getTotalMoney() == 0){
+            player.isPlaying() = false;
+        }
     }
     
 }
