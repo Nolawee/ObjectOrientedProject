@@ -20,12 +20,14 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Choice;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class MainMenu1 {
 
 	private JFrame frame;
 	private JTextField textFieldSetChip;
 	private JTextField textFieldSetComp;
+	private JTextField textFieldRules;
 
 	/**
 	 * Launch the application.
@@ -82,15 +84,15 @@ public class MainMenu1 {
 		btnNewGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
 		panelMainMenu.add(btnNewGame);
 		
-		JButton btnLoadGame = new JButton("Load Game");
-		btnLoadGame.setForeground(new Color(255, 204, 0));
-		btnLoadGame.setFont(new Font("Helvetica", Font.PLAIN, 26));
-		btnLoadGame.setBounds(200, 360, 180, 60);
-		btnLoadGame.setContentAreaFilled(false);
-		btnLoadGame.setOpaque(false);
-		btnLoadGame.setBorderPainted(true);
-		btnLoadGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
-		panelMainMenu.add(btnLoadGame);
+		JButton btnLoadGameMainMenu = new JButton("Load Game");
+		btnLoadGameMainMenu.setForeground(new Color(255, 204, 0));
+		btnLoadGameMainMenu.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		btnLoadGameMainMenu.setBounds(200, 360, 180, 60);
+		btnLoadGameMainMenu.setContentAreaFilled(false);
+		btnLoadGameMainMenu.setOpaque(false);
+		btnLoadGameMainMenu.setBorderPainted(true);
+		btnLoadGameMainMenu.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		panelMainMenu.add(btnLoadGameMainMenu);
 		
 		JButton btnHelp = new JButton("Help");
 		btnHelp.setForeground(new Color(255, 204, 0));
@@ -194,14 +196,79 @@ public class MainMenu1 {
 		panelNewGame.add(btnGoBackNewGame);
 		
 		
-		
+		// ---- Load Game ---- //
 		JPanel panelLoadGame = new JPanel();
 		panelLoadGame.setBackground(new Color(0, 102, 0));
 		frame.getContentPane().add(panelLoadGame, "name_98257238941273");
+		panelLoadGame.setLayout(null);
 		
+		JLabel lblBlackJackLoadGame = new JLabel("BlackJack!");
+		lblBlackJackLoadGame.setBounds(200, 100, 400, 80);
+		lblBlackJackLoadGame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBlackJackLoadGame.setForeground(new Color(255, 204, 0));
+		lblBlackJackLoadGame.setFont(new Font("Helvetica", Font.ITALIC, 65));
+		panelLoadGame.add(lblBlackJackLoadGame);
+		
+		JList listSavedGame = new JList();
+		listSavedGame.setForeground(new Color(255, 204, 0));
+		listSavedGame.setBounds(150, 200, 500, 200);
+		listSavedGame.setOpaque(false);
+		listSavedGame.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		listSavedGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		
+		panelLoadGame.add(listSavedGame);
+		
+		JButton btnLoadLoadGame = new JButton("Load");
+		btnLoadLoadGame.setOpaque(false);
+		btnLoadLoadGame.setForeground(new Color(255, 204, 0));
+		btnLoadLoadGame.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		btnLoadLoadGame.setContentAreaFilled(false);
+		btnLoadLoadGame.setBorderPainted(true);
+		btnLoadLoadGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		btnLoadLoadGame.setBounds(200, 450, 180, 60);
+		panelLoadGame.add(btnLoadLoadGame);
+		
+		JButton btnMainMenuLoadGame = new JButton("Main Menu");
+		btnMainMenuLoadGame.setOpaque(false);
+		btnMainMenuLoadGame.setForeground(new Color(255, 204, 0));
+		btnMainMenuLoadGame.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		btnMainMenuLoadGame.setBorderPainted(true);
+		btnMainMenuLoadGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		btnMainMenuLoadGame.setBounds(420, 450, 180, 60);
+		panelLoadGame.add(btnMainMenuLoadGame);
+		
+		
+		// ---- Help Panel ---- //
 		JPanel panelHelp = new JPanel();
+		frame.getContentPane().add(panelHelp, "name_103674355256420");
 		panelHelp.setBackground(new Color(0, 102, 0));
-		frame.getContentPane().add(panelHelp, "name_98209967818217");
+		panelHelp.setLayout(null);
+		
+		JLabel label = new JLabel("BlackJack!");
+		label.setBounds(200, 50, 400, 80);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(new Color(255, 204, 0));
+		label.setFont(new Font("Helvetica", Font.ITALIC, 65));
+		panelHelp.add(label);
+		
+		JButton btnMainMenuHelp = new JButton("Main Menu");
+		btnMainMenuHelp.setOpaque(false);
+		btnMainMenuHelp.setForeground(new Color(255, 204, 0));
+		btnMainMenuHelp.setFont(new Font("Helvetica", Font.PLAIN, 26));
+		btnMainMenuHelp.setBorderPainted(true);
+		btnMainMenuHelp.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		btnMainMenuHelp.setBounds(310, 465, 180, 60);
+		panelHelp.add(btnMainMenuHelp);
+		
+		textFieldRules = new JTextField();
+		textFieldRules.setEditable(false);
+		textFieldRules.setOpaque(false);
+		textFieldRules.setFont(new Font("Helvetica",Font.PLAIN,26));
+		textFieldRules.setForeground(new Color(255,204,0));
+		textFieldRules.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
+		textFieldRules.setBounds(100, 130, 600, 320);
+		panelHelp.add(textFieldRules);
+		textFieldRules.setColumns(10);
 		
 		
 		
