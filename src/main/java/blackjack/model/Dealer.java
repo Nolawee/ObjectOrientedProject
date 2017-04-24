@@ -48,6 +48,16 @@ public class Dealer extends Player {
     public boolean mustHit() {
         return getHandTotal() < 17;
     }
+
+    @Override
+    public void split(Dealer dealer) {
+        //Do nothing because we aren't implementing Dealer splitting yet
+    }
+
+    @Override
+    public void printSplitHand() {
+        //Do nothing because we aren't implementing Dealer splitting yet
+    }
     
     
     //Implementation of Dealer continued here
