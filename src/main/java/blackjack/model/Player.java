@@ -64,6 +64,10 @@ public abstract class Player {
         dealer.processDealRequest(this);
     }
     
+    public ArrayList<Card> getHand() {
+        return hand;
+    }
+    
     public void clearHand() {
         hand.clear();
     }
