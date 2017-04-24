@@ -20,6 +20,17 @@ public class ComputerPlayer extends Player {
     public boolean mustHit() {
         return getHandTotal() < 17;
     }
+
+    @Override
+    public void split(Dealer dealer) {
+        //Do nothing because we aren't implementing Computer splitting yet
+    }
+
+    @Override
+    public void printSplitHand() {
+        //Do nothing because we aren't implementing Computer splitting yet
+        
+    }
     
     //Implementation of ComputerPlayer here
 }
