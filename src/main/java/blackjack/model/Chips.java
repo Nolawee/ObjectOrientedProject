@@ -27,8 +27,17 @@ public class Chips {
 	    chips.put(chipVal, currentChipCount++);
 	}
 	
-	//TODO: Make new method "acceptWinningBet"? In Player class?
-	//        acceptWinningBet(Chips bet, int multiplier)
+	public int getTotalValueOfChips() {
+	    int sum = 0;
+        for (Map.Entry<Integer, Integer> entry : chips.entrySet()) {
+            sum += entry.getKey() * entry.getValue();
+        }
+        return sum;
+	}
+	
+	//TODO: Remember that a winning bet earns double what was bet.
+	//      Make a new method "acceptWinningBet"? Here? In Player class?
+	//        acceptWinningBet(Chips bet, int multiplier)?
 	public void combineChips(Chips chips) { 
 	    Map<Integer,Integer> newChips = chips.getChips();
 	    for (int chipVal: newChips.keySet()) {
