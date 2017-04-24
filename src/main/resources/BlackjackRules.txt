@@ -170,7 +170,7 @@ player who has stood the amount of that player's bet. If the
 dealer stands at 21 or less, he pays the bet of any player having
 a higher total (not exceeding 21) and collects the bet of any
 player having a lower total. If there is a stand-off (a player
-having the same total as the dealer), no chips are paid out or
+having the same total as the dealer) then no chips are paid out or
 collected.
 
 
