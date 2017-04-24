@@ -21,7 +21,7 @@ public abstract class Player {
         return isPlaying;
     }
 
-    public void setPlaying(boolean play){
+    public void setIsPlaying(boolean play){
         isPlaying = play;
     }
     
