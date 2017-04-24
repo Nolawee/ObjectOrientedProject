@@ -11,11 +11,7 @@ public abstract class Player {
     protected Chips chips;
     private Chips currentBet; //We'll be representing bets with chips themselves, not an int.
     protected boolean isPlaying;
-    protected boolean winner;
-    
-    /*abstract public void takeTurn();*/ //NOT USED because TurnManager handles taking turns. 
-                                         //Leaving this here temporarily to alert our team
-                                         //because this varies from our class diagram. 
+  
     
     public void startPlaying() {
         isPlaying = true;
@@ -43,9 +39,16 @@ public abstract class Player {
     
     public int getTotalMoney() {
         int sum = 0;
+        //Sum up values of stored chips
         for (Map.Entry<Integer, Integer> entry : chips.getChips().entrySet()) {
             sum += entry.getKey() * entry.getValue();
         }
+        
+        //Sum up values of currently bet chips
+        for (Map.Entry<Integer, Integer> entry : currentBet.getChips().entrySet()) {
+            sum += entry.getKey() * entry.getValue();
+        }
+        
         return sum;
     }
     
@@ -81,14 +84,6 @@ public abstract class Player {
     public void bet(int chipVal) throws IllegalStateException {
         int betChip = chips.takeChip(chipVal);
         currentBet.addChip(betChip);
-    }
-
-    public boolean won(){
-        return iswinner;
-    }
-
-    public void setWinner(boolean isWinner){
-        winner = isWinner;
     }
 
     /*
