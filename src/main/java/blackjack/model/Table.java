@@ -17,6 +17,7 @@ public class Table implements Serializable {
     public Table(ArrayList<Player> players, Dealer dealer) {
         this.players = players;
         this.dealer = dealer;
+        brokePlayers = new Stack<Player>();
         tm = new TurnManager(players, dealer);
     }
     
@@ -41,6 +42,7 @@ public class Table implements Serializable {
             tm.takeTurn();
             removeAnyBrokePlayer();
         }
+        endGame();
     }
     
     /*
@@ -49,11 +51,15 @@ public class Table implements Serializable {
      */
     private void removeAnyBrokePlayer() { 
         for (Player player : players) {   
-            if (player.getTotalMoney() <= 0){
+            if (player.getTotalMoney() <= 0) {
                 brokePlayers.push(player); //Used so we don't lose player info after removing them
                 players.remove(player);
             }
         }
+    }
+    
+    private void endGame() {
+        //Do something after the game is over. Maybe display how players did?
     }
     
 }
