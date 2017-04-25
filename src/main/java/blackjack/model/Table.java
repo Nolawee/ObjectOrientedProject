@@ -50,10 +50,12 @@ public class Table implements Serializable {
      * remove them from the list of players.
      */
     private void removeAnyBrokePlayer() { 
-        for (Player player : players) {   
+        Player player;
+        for (int i = 0; i < players.size(); i++) {   
+            player = players.get(i);
             if (player.getTotalMoney() <= 0) {
                 brokePlayers.push(player); //Used so we don't lose player info after removing them
-                players.remove(player);
+                players.remove(player); 
             }
         }
     }
