@@ -41,7 +41,7 @@ public class PlayHandPhase implements State {
                 
                 System.out.println("Would you like to split your hand? (yes/no)");
                 Scanner scan = new Scanner(System.in);
-                String yn = scan.next();
+                String yn = scan.nextLine(); //TODO: Throws NoSuchElementException; no change between scan.next() or nextLine() 
                 
                 //TODO: Error checking (catch bad responses and re-prompt)
                 if (yn.equalsIgnoreCase("yes") || yn.equalsIgnoreCase("y")) {
@@ -61,28 +61,30 @@ public class PlayHandPhase implements State {
      */
     public void playHand(Player player, Dealer dealer) {
         int handTotal;
-        String hds = "";
         Scanner scan = new Scanner(System.in);
+        String hds = "";
         
         while (player.isPlaying() && !player.hasBusted()) {
             handTotal = player.getHandTotal();
             
-            player.printHand(); //Won't be needed when view is always showing hands
-            System.out.println("You are currently at " + handTotal + ".");
-            System.out.println("Would you like to hit or stand?");
+            try {
+                player.printHand(); //Won't be needed when view is always showing hands
+                System.out.println("You are currently at " + handTotal + ".");
+                System.out.println("Would you like to hit or stand?");
             
-            hds = scan.nextLine(); //TODO: This doesn't work. Throws "No line found" before we can type anything.
+                //if (scan.hasNextLine()) scan.nextLine(); //Doesn't seem to help the problem below
+                //hds = scan.nextLine(); //TODO: This doesn't work. Throws "No line found" before we can type anything.
             
-            if (hds.equalsIgnoreCase("hit")) {
-                player.hit(dealer);
-            }
-            else if (hds.equalsIgnoreCase("double")) {
-                player.doubleBet(dealer);
-            }
-            else if (hds.equalsIgnoreCase("stand")) {
-                player.stand();
-            }
-            else { //Error checking (catch bad responses and re-prompt)
+                if (hds.equalsIgnoreCase("hit")) {
+                    player.hit(dealer);
+                }
+                else if (hds.equalsIgnoreCase("double")) {
+                    player.doubleBet(dealer);
+                }
+                else if (hds.equalsIgnoreCase("stand")) {
+                    player.stand();
+                }
+            } catch (Exception e) {
                 System.out.println("'" + hds + "' was not a valid response. Please type 'hit,' 'double,' or 'stand.'");
             }
             
