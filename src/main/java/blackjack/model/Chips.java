@@ -24,7 +24,7 @@ public class Chips {
 	    if (chips.containsKey(chipVal)) currentChipCount = chips.get(chipVal);
 	    else currentChipCount = 0;
 	    
-	    chips.put(chipVal, currentChipCount++);
+	    chips.put(chipVal, currentChipCount+1);
 	}
 	
 	public int getTotalValueOfChips() {
@@ -47,7 +47,8 @@ public class Chips {
 	public int takeChip(int chipVal) throws IllegalStateException {
         if (chips.containsKey(chipVal)) {
             int currentChipCount = chips.get(chipVal);
-            chips.put(chipVal, currentChipCount--);
+            chips.put(chipVal, currentChipCount-1);
+            chips.values().removeIf(v -> v==0);
             return chipVal;
         }
         else throw new IllegalStateException("That chip is not among the current chips: " + chipVal);
