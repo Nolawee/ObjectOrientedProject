@@ -69,7 +69,7 @@ public class PlayHandPhase implements State {
             player.printHand(); //Won't be needed when view is always showing hands
             System.out.println("You are currently at " + handTotal + ".");
             System.out.println("Would you like to hit or stand?");
-            String hds = scan.next();
+            String hds = scan.nextLine();
             
             if (hds.equalsIgnoreCase("hit")) {
                 player.hit(dealer);
