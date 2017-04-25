@@ -45,7 +45,8 @@ public class DealerHandPhase implements State {
     
     public void handlePlayerLoss(Player player, Dealer dealer) {
         //Player wins nothing
-        dealer.clearBet();
+        dealer.clearBet(); //Not really necessary since we haven't handled dealers playing like Players, but why not
+        dealer.winTurn();
     }
     
     public void handlePlayerWin(Player player, Dealer dealer) {
