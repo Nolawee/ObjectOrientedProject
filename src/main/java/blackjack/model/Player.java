@@ -81,6 +81,14 @@ public abstract class Player {
         return sum;
     }
     
+    public Chips getCurrentBet() {
+        return currentBet;
+    }
+    
+    public void clearBet() {
+        currentBet.getChips().clear();
+    }
+    
     public boolean hasBusted() {
         return getHandTotal() > 21;
     }
