@@ -27,19 +27,20 @@ public class DealerHandPhase implements State {
         if (dealer.hasBusted()) {
             handlePlayerWin(player, dealer);
         }
+        else {
+            //Compare dealer and player hands
+            int dealerHand = dealer.getHandTotal();
+            int playerHand = player.getHandTotal();
         
-        //Compare dealer and player hands
-        int dealerHand = dealer.getHandTotal();
-        int playerHand = player.getHandTotal();
-        
-        if (dealerHand < playerHand) {
-            handlePlayerWin(player, dealer);
-        }
-        else if (dealerHand > playerHand) {
-            handlePlayerLoss(player, dealer);
-        }
-        else if (dealerHand == playerHand) {
-            handleTie(player, dealer);
+            if (dealerHand < playerHand) {
+                handlePlayerWin(player, dealer);
+            }
+            else if (dealerHand > playerHand) {
+                handlePlayerLoss(player, dealer);
+            }
+            else if (dealerHand == playerHand) {
+                handleTie(player, dealer);
+            }
         }
     }
     
