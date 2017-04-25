@@ -36,7 +36,7 @@ public class Table implements Serializable {
      * removed from play. Game ends when all
      * players have gone broke.
      */
-    private void playBlackjack() {
+    public void playBlackjack() {
         while (!players.isEmpty()) {
             tm.takeTurn();
             removeAnyBrokePlayer();
