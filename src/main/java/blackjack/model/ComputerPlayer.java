@@ -1,5 +1,7 @@
 package blackjack.model;
 
+import java.util.ArrayList;
+
 public class ComputerPlayer extends Player {
     Chips currentBet; //We'll be representing bets with chips themselves, not an int.
     Chips chips;
@@ -8,7 +10,10 @@ public class ComputerPlayer extends Player {
     public ComputerPlayer(String name, int startingMoney) {
         setName(name);
         turnsWon = 0;
-        this.chips = new Chips(startingMoney);
+        chips = new Chips(startingMoney);
+        hand = new ArrayList<Card>();
+        currentBet = new Chips(0);
+        turnsWon = 0;
         isPlaying = false;
     }
     

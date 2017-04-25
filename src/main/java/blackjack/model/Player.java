@@ -7,9 +7,9 @@ import java.util.Map;
 public abstract class Player {
     protected String name;
     protected int turnsWon; //renamed from "gamesWon" to be more explanatory
-    private ArrayList<Card> hand;
+    protected ArrayList<Card> hand;
     protected Chips chips;
-    private Chips currentBet; //We'll be representing bets with chips themselves, not an int.
+    protected Chips currentBet; //We'll be representing bets with chips themselves, not an int.
     protected boolean isPlaying;
   
     
@@ -21,7 +21,7 @@ public abstract class Player {
         return isPlaying;
     }
 
-    public void setIsPlaying(boolean play){
+    public void setIsPlaying(boolean play) {
         isPlaying = play;
     }
     

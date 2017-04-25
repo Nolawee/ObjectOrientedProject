@@ -8,8 +8,12 @@ public class HumanPlayer extends Player {
     public HumanPlayer(String name, int startingMoney) {
         setName(name);
         turnsWon = 0;
-        this.chips = new Chips(startingMoney);
+        chips = new Chips(startingMoney);
+        currentBet = new Chips(0);
+        hand = new ArrayList<Card>();
+        splitHand = new ArrayList<Card>();
         isPlaying = false;
+        
     }
 
     public int getSplitHandTotal() {

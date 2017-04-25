@@ -4,10 +4,15 @@ import java.util.ArrayList;
 
 public class Dealer extends Player {
     private Deck deck;
-    private ArrayList<Card> hand;
     
     public Dealer() {
+        name = "Dealer";
         deck = new Deck();
+        hand = new ArrayList<Card>();
+        chips = new Chips(0);
+        currentBet = new Chips(0);
+        turnsWon = 0;
+        isPlaying = false;
     }
     
     public Card deal() {
