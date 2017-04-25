@@ -3,12 +3,10 @@ package blackjack.model;
 public class DealerHandPhase implements State {
     @Override
     public void takeTurn(TurnManager wrapper, Player player, Dealer dealer) {
-        if (player.hasBusted()) { //Dealer automatically wins if player busted during their turn. 
+        if (player.hasBusted()) //Dealer automatically wins if player busted during their turn. 
             handlePlayerLoss(player, dealer);  
-        }
-        else {
+        else 
             playDealerHand(player, dealer);
-        }
         
         //End turn
         player.clearBet();
@@ -46,15 +44,20 @@ public class DealerHandPhase implements State {
     }
     
     public void handlePlayerLoss(Player player, Dealer dealer) {
-        //lose bet
+        //Player wins nothing
+        dealer.clearBet();
     }
     
     public void handlePlayerWin(Player player, Dealer dealer) {
-        //win twice what was bet
+        //Player wins twice what they bet
+        player.getChips().combineChips(player.getCurrentBet());
+        player.getChips().combineChips(player.getCurrentBet()); 
+        player.winTurn();
     }
     
     public void handleTie(Player player, Dealer dealer) {
-        //player gets their bet back
+        //Player gets back their bet
+        player.getChips().combineChips(player.getCurrentBet());
     }
     
 }
