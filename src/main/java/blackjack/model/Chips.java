@@ -35,9 +35,6 @@ public class Chips {
         return sum;
 	}
 	
-	//TODO: Remember that a winning bet earns double what was bet.
-	//      Make a new method "acceptWinningBet"? Here? In Player class?
-	//        acceptWinningBet(Chips bet, int multiplier)?
 	public void combineChips(Chips chips) { 
 	    Map<Integer,Integer> newChips = chips.getChips();
 	    for (int chipVal: newChips.keySet()) {
@@ -83,9 +80,9 @@ public class Chips {
 	
 	//----Temp main method for testing--------------------------------------------------
 	
-	public static void main(String[] args) {
-	    Chips chips = new Chips(1100732);
-	    
-	    chips.printChips();
-	}
+//	public static void main(String[] args) {
+//	    Chips chips = new Chips(1100732);
+//	    
+//	    chips.printChips();
+//	}
 }
