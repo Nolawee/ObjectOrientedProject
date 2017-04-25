@@ -36,7 +36,12 @@ public class Card {
 	}
 	
 	public int getNumber() {
-		return number;
+	    switch (number) {
+	        case JACK: return 10;
+	        case QUEEN: return 10;
+	        case KING: return 10;
+	        default: return number;
+	    }
 	}
 	
 	public String getSuit() {
