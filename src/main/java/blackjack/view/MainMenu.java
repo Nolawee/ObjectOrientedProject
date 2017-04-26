@@ -249,12 +249,15 @@ public class MainMenu {
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int chipEntered = Integer.parseInt(textFieldSetChip.getText());
-				//int compPlayerEntered = Integer.parseInt(textFieldSetComp.getText());
-				if(chipEntered > 50 && chipEntered < 1000){
+				int compPlayerEntered = Integer.parseInt(textFieldSetComp.getText());
+				if(chipEntered > 50 && chipEntered < 100000){
 					frame.dispose();
 					tableView tableWindow;
 					try {
 						tableWindow = new tableView();
+						tableWindow.setStartChip(chipEntered);
+						tableWindow.setNumCompPlayer(compPlayerEntered);
+												
 						tableWindow.setVisible(true);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
