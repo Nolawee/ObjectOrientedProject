@@ -62,6 +62,7 @@ public class Table implements Serializable {
     
     private void endGame() {
         //Do something after the game is over. Maybe display how players did?
+        System.out.println("Game over!"); //Temporary
     }
     
 }
