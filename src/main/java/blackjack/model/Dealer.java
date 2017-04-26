@@ -53,6 +53,19 @@ public class Dealer extends Player {
     public boolean mustHit() {
         return getHandTotal() < 17;
     }
+    
+    @Override 
+    public void printHand() {
+        String printedHand = "DEALER'S HAND: [ ";
+        
+        for (Card card : hand) {
+            printedHand +=  "" + card.getNumber() + ", "; 
+        }
+        printedHand = printedHand.substring(0, printedHand.length()-2); //Trims the comma from the last card's number
+        printedHand += " ] (" + this.getHandTotal() + ")";
+        
+        System.out.println(printedHand);
+    }
 
     @Override
     public void split(Dealer dealer) {

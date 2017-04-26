@@ -30,6 +30,7 @@ public class PlayHandPhase implements State {
             Card card2 = player.getHand().get(1);
             if (card1.getNumber() == card2.getNumber()) {
                 
+                player.printHand();
                 System.out.println("Would you like to split your hand? (yes/no)");
                 
                 //TODO: Error checking (catch bad responses and re-prompt)
@@ -70,14 +71,16 @@ public class PlayHandPhase implements State {
                 if (hds.equalsIgnoreCase("hit")) {
                     player.hit(dealer);
                 }
-                else if (hds.equalsIgnoreCase("double")) {
-                    player.doubleBet(dealer);
-                }
+//                else if (hds.equalsIgnoreCase("double")) { //Double doesn't fully work yet.
+//                    player.doubleBet(dealer);
+//                }
                 else if (hds.equalsIgnoreCase("stand")) {
                     player.stand();
+                    System.out.println("You have stood at " + player.getHandTotal() + "." + System.lineSeparator()); 
                 }
             } catch (Exception e) {
-                System.out.println("'" + hds + "' was not a valid response. Please type 'hit,' 'double,' or 'stand.'");
+                //System.out.println("'" + hds + "' was not a valid response. Please type 'hit,' 'double,' or 'stand.'");
+                System.out.println("'" + hds + "' was not a valid response. Please type 'hit' or 'stand.'");
             }
             
             if (player.hasBusted()) { 

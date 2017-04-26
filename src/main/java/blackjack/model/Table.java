@@ -38,13 +38,27 @@ public class Table implements Serializable {
      * players have gone broke.
      */
     public void playBlackjack() {
+        printWelcomeMessage();
         while (!players.isEmpty()) {
             tm.takeTurn();
             removeAnyBrokePlayer();
         }
         endGame();
     }
+
+    //----Helper methods-------------------------------------------------------------------------------
     
+    public void printWelcomeMessage() {
+        String welcomeMessage = "Hello ";
+        
+        for (Player player : players) {
+            welcomeMessage += player.getName() + ", ";
+        }
+        welcomeMessage += "welcome to Blackjack! Happy gambling." + System.lineSeparator();
+        
+        System.out.println(welcomeMessage);
+    }
+
     /*
      * If a turn causes a player to run out of chips,
      * remove them from the list of players.
@@ -63,6 +77,7 @@ public class Table implements Serializable {
     private void endGame() {
         //Do something after the game is over. Maybe display how players did?
         System.out.println("Game over!"); //Temporary
+        //TODO: Improve this
     }
     
 }
