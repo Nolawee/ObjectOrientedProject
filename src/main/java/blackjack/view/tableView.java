@@ -27,6 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class tableView extends JFrame {
 
 	private JPanel panelTable;
@@ -40,7 +41,6 @@ public class tableView extends JFrame {
 	public int numCompPlayers;
 
 	private int currentChip = 100;
-
 	public void setStartChip(int amount){
 		this.startChip = amount;
 	}
@@ -273,7 +273,7 @@ public class tableView extends JFrame {
 		
 		
 		btnDeal1.setForeground(new Color(255, 204, 0));
-		btnDeal1.setBounds(120, 465, 40, 20);
+		btnDeal1.setBounds(120, 470, 40, 20);
 		btnDeal1.setContentAreaFilled(false);
 		btnDeal1.setOpaque(false);
 		btnDeal1.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
@@ -283,7 +283,7 @@ public class tableView extends JFrame {
 		
 		lblDealCard1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDealCard1.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png"));
-		lblDealCard1.setBounds(125, 420, 30, 45);
+		lblDealCard1.setBounds(125, 430, 30, 45);
 		lblDealCard1.setVisible(false);
 		panelTable.add(lblDealCard1);
 		
@@ -317,14 +317,14 @@ public class tableView extends JFrame {
 		btnDeal2.setForeground(new Color(255, 204, 0));
 		btnDeal2.setContentAreaFilled(false);
 		btnDeal2.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-		btnDeal2.setBounds(320, 542, 40, 20);
+		btnDeal2.setBounds(320, 550, 40, 20);
 		btnDeal2.setVisible(false);
 		panelTable.add(btnDeal2);
 		
 		
 		lblDealCard2.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png"));
 		lblDealCard2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDealCard2.setBounds(325, 500, 30, 45);
+		lblDealCard2.setBounds(325, 510, 30, 45);
 		lblDealCard2.setVisible(false);
 		panelTable.add(lblDealCard2);
 		
@@ -358,14 +358,14 @@ public class tableView extends JFrame {
 		btnDeal3.setForeground(new Color(255, 204, 0));
 		btnDeal3.setContentAreaFilled(false);
 		btnDeal3.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-		btnDeal3.setBounds(435, 542, 40, 20);
+		btnDeal3.setBounds(435, 550, 40, 20);
 		btnDeal3.setVisible(false);
 		panelTable.add(btnDeal3);
 		
 		
 		lblDealCard3.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png"));
 		lblDealCard3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDealCard3.setBounds(440, 500, 30, 45);
+		lblDealCard3.setBounds(440, 510, 30, 45);
 		lblDealCard3.setVisible(false);
 		panelTable.add(lblDealCard3);
 		
@@ -399,14 +399,14 @@ public class tableView extends JFrame {
 		btnDeal4.setForeground(new Color(255, 204, 0));
 		btnDeal4.setContentAreaFilled(false);
 		btnDeal4.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-		btnDeal4.setBounds(645, 465, 40, 20);
+		btnDeal4.setBounds(645, 470, 40, 20);
 		btnDeal4.setVisible(false);
 		panelTable.add(btnDeal4);
 		
 		
 		lblDealCard4.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png"));
 		lblDealCard4.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDealCard4.setBounds(650, 420, 30, 45);
+		lblDealCard4.setBounds(650, 430, 30, 45);
 		lblDealCard4.setVisible(false);
 		panelTable.add(lblDealCard4);
 		
