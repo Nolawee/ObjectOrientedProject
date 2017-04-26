@@ -1,6 +1,7 @@
 package blackjack.model;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class TurnManager {
     private State currentState;
@@ -40,6 +41,7 @@ public class TurnManager {
     }
     
     public void takeTurn() {
-        currentState.takeTurn(this, currentPlayer, currentDealer);
+        Scanner scan = new Scanner(System.in); //Single Scanner needed for player input to work across all states
+        currentState.takeTurn(this, currentPlayer, currentDealer, scan);
     }
 }

@@ -1,8 +1,10 @@
 package blackjack.model;
 
+import java.util.Scanner;
+
 public class SplitHandPhase implements State {
     @Override
-    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer) {
+    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer, Scanner scan) {
         wrapper.setState(new DealerHandPhase());
         //TODO: Add code for the play split hand phase of this turn
         //      (we arrived here because a player chose "split"

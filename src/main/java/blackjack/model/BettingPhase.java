@@ -4,35 +4,26 @@ import java.util.Scanner;
 
 public class BettingPhase implements State {
     @Override
-    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer) {
+    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer, Scanner scan) {
         wrapper.setState(new PlayHandPhase()); 
         player.startPlaying();
-        //NOTE: We need to figure out how we're going to prompt human players
-        //      for input here. 
-        //
-        //      If we're making a fancy GUI, those prompts should probably
-        //      happen elsewhere. 
-        //      If we're just gonna do a command-line interface, right here
-        //      would be the place to do that. 
-        //
-        //      The code below assumes we're using just a command-line interface
-        //      and fully implements everything this class would need to do.
         
-        placePlayerBet(player);
+        placePlayerBet(player, scan);
     }
+    
+    //----Helper methods-------------------------------------------------------------------
     
     /*
      * Takes in input from the user to place their bet on the forthcoming hand.
-     * Assumes our view is a command-line interface.
+     * Currently utilizes a Scanner object to take command-line input from players.
      */
-    public void placePlayerBet(Player player) {
+    public void placePlayerBet(Player player, Scanner scan) {
         int bet;
         System.out.println("How much would you like to bet on this hand? When done entering chips to bet, enter -1.");
         //This next printout won't be needed when the view is always showing the chips
         System.out.println("The chips you have to choose from are: " ); player.getChips().printChips(); 
         System.out.println();
         
-        Scanner scan = new Scanner(System.in);
         int playerInput = 0;
         while (true) {
             try {
@@ -48,7 +39,7 @@ public class BettingPhase implements State {
                 System.out.println("You don't have a chip of value: " + playerInput + ". Try again.");    
             }
         }  
-        scan.close();
+        //scan.close();
     }
     
 }

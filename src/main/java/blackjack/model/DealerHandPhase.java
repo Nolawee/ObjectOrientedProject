@@ -1,8 +1,10 @@
 package blackjack.model;
 
+import java.util.Scanner;
+
 public class DealerHandPhase implements State {
     @Override
-    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer) {
+    public void takeTurn(TurnManager wrapper, Player player, Dealer dealer, Scanner scan) {
         if (player.hasBusted()) //Dealer automatically wins if player busted during their turn. 
             handlePlayerLoss(player, dealer);  
         else 
