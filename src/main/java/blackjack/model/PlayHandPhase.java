@@ -59,11 +59,9 @@ public class PlayHandPhase implements State {
         String hds = "";
         
         while (player.isPlaying() && !player.hasBusted()) {
-            handTotal = player.getHandTotal();
-            
             try {
                 player.printHand(); //Won't be needed when view is always showing hands
-                System.out.println("You are currently at " + handTotal + ".");
+                System.out.println("You are currently at " + player.getHandTotal() + ".");
                 System.out.println("Would you like to hit or stand?");
             
                 hds = scan.nextLine(); 
@@ -84,7 +82,7 @@ public class PlayHandPhase implements State {
             }
             
             if (player.hasBusted()) { 
-                System.out.println("You Busted with a total of " + handTotal); 
+                System.out.println("You Busted with a total of " + player.getHandTotal() + "."); 
                 player.setIsPlaying(false);
             }
         }

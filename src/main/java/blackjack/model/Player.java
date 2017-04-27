@@ -145,7 +145,7 @@ public abstract class Player {
         String printedHand = "HAND: [ ";
         
         for (Card card : hand) {
-            printedHand +=  "" + card.getNumber() + ", "; 
+            printedHand +=  "" + card.getValue() + ", "; 
         }
         printedHand = printedHand.substring(0, printedHand.length()-2); //Trims the comma from the last card's number
         printedHand += " ]";

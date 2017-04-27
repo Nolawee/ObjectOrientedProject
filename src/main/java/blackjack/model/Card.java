@@ -44,6 +44,16 @@ public class Card {
 	    }
 	}
 	
+	public String getValue() {
+	    switch (number) {
+	        case ACE: return "Ace"; 
+	        case JACK: return "Jack";
+	        case QUEEN: return "Queen";
+	        case KING: return "King";
+	        default: return "" + number;   
+	    }
+	}
+	
 	public String getSuit() {
 		return suit;
 	}
