@@ -30,6 +30,7 @@ public class BettingPhase implements State {
                 System.out.println("Next chip: ");
                 playerInput = scan.nextInt();
                 if (playerInput == -1) { //Someone might think of something cooler than typing -1. I'm not creative.
+                    System.out.print("You have bet $" + player.getCurrentBet().getTotalValueOfChips() + ". ");
                     System.out.println("The dealer will now deal the starting hands." + System.lineSeparator());
                     break;
                 } else {

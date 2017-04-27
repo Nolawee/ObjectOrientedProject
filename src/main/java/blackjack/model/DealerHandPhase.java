@@ -71,7 +71,6 @@ public class DealerHandPhase implements State {
         System.out.print("You won with "); player.printHand();
         System.out.println("You have $" + player.getTotalMoney());
         System.out.println(); //New line
-        //Display money?
     }
     
     public void handleTie(Player player, Dealer dealer) {
