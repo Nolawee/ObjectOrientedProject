@@ -14,7 +14,7 @@ public class PlayHandPhase implements State {
         playHand(player, dealer, scan);
     }
     
-    //----Helper methods------------------------------------------------------
+    //----Helper methods--------------------------------------------------------------------
     
     /*
      * Checks the two cards of a player's starting hand and 
@@ -55,7 +55,6 @@ public class PlayHandPhase implements State {
      * Currently utilizes a Scanner object to take command-line input from players.
      */
     public void playHand(Player player, Dealer dealer, Scanner scan) {
-        int handTotal;
         String hds = "";
         
         while (player.isPlaying() && !player.hasBusted()) {
@@ -69,7 +68,7 @@ public class PlayHandPhase implements State {
                 if (hds.equalsIgnoreCase("hit")) {
                     player.hit(dealer);
                 }
-//                else if (hds.equalsIgnoreCase("double")) { //Double doesn't fully work yet.
+//                else if (hds.equalsIgnoreCase("double")) { //player.doubleBet isn't implemented yet
 //                    player.doubleBet(dealer);
 //                }
                 else if (hds.equalsIgnoreCase("stand")) {
@@ -87,6 +86,5 @@ public class PlayHandPhase implements State {
             }
         }
     }
-   
  
 }

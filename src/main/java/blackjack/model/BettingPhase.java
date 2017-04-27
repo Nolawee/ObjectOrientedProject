@@ -42,7 +42,6 @@ public class BettingPhase implements State {
                 System.out.println("You don't have a chip of value: " + playerInput + ". Try again.");    
             }
         }  
-        //scan.close();
     }
     
 }

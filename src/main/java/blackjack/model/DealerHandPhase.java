@@ -18,8 +18,12 @@ public class DealerHandPhase implements State {
     }
     
     
-    //----Helper methods------------------------------------------------------
+    //----Helper methods--------------------------------------------------------------------
     
+    /*
+     * Play through the dealer's hand then handle bets accordingly afterward.
+     * Currently assumes that players interface through the command line.
+     */
     public void playDealerHand(Player player, Dealer dealer) {
         dealer.printHand();
         
@@ -35,7 +39,6 @@ public class DealerHandPhase implements State {
             handlePlayerWin(player, dealer);
         }
         else {
-            //Compare dealer and player hands
             int dealerHand = dealer.getHandTotal();
             int playerHand = player.getHandTotal();
         
@@ -51,30 +54,34 @@ public class DealerHandPhase implements State {
         }
     }
     
+    /*
+     * Player wins nothing
+     */
     public void handlePlayerLoss(Player player, Dealer dealer) {
-        //Player wins nothing
-        dealer.clearBet(); //Not really necessary since we haven't handled dealers playing like Players, but why not
+        dealer.clearBet(); //Not really necessary since we haven't handled Dealers playing like Players, but why not
+        player.clearBet();
         dealer.winTurn();
         
         System.out.print("Aw, you lost! "); System.out.print("The dealer won with "); dealer.printHand();
-        player.clearBet();
-        System.out.println("You have $" + player.getTotalMoney());
-        System.out.println(); //New line
+        System.out.println("You have $" + player.getTotalMoney() + System.lineSeparator());
     }
     
+    /*
+     * Player wins twice what they bet
+     */
     public void handlePlayerWin(Player player, Dealer dealer) {
-        //Player wins twice what they bet
         player.getChips().combineChips(player.getCurrentBet());
         player.getChips().combineChips(player.getCurrentBet()); 
         player.winTurn();
         
         System.out.print("You won with "); player.printHand();
-        System.out.println("You have $" + player.getTotalMoney());
-        System.out.println(); //New line
+        System.out.println("You have $" + player.getTotalMoney() + System.lineSeparator());
     }
     
+    /*
+     * Player gets back their bet
+     */
     public void handleTie(Player player, Dealer dealer) {
-        //Player gets back their bet
         player.getChips().combineChips(player.getCurrentBet());
         
         System.out.println("You have tied with the dealer. You get your bet back.");
