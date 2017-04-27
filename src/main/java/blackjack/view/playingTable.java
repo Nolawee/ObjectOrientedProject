@@ -2,24 +2,31 @@ package blackjack.view;
 
 import java.io.IOException;
 
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import blackjack.model.*;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 @SuppressWarnings("serial")
-public class playingTable extends JPanel {
+public class playingTable extends JFrame {
 	private HumanPlayer humanPlayer;
 	private ComputerPlayer computerPlayer;
 	private Dealer dealer;
@@ -39,11 +46,31 @@ public class playingTable extends JPanel {
 	private ArrayList<Point2D> compPosition = new ArrayList<Point2D>();
 	private final ArrayList<Point2D> playerPosition = new ArrayList<Point2D>();
 	private int humanBet;
+	private int humanBetPosition;
 	private int startChip;
 	private int currentChip;
 	private int numCompPlayers;
 	private int numPlayers;
 	
+	// --- Font Style --- //
+	Color goldColor = new Color(255,204,0);
+	Font fontHel12 = new Font("Helvetica", Font.PLAIN, 12);
+	Font fontHel20 = new Font("Helvetica", Font.PLAIN, 20);
+	
+	// --- Swing GUI Variables --- //
+	JButton btnPlaceBet1 = new JButton("BET");
+	JButton btnPlaceBet2 = new JButton("BET");
+	JButton btnPlaceBet3 = new JButton("BET");
+	JButton btnPlaceBet4 = new JButton("BET");
+	ArrayList<JButton> btnPlaceBets = new ArrayList<JButton>();
+
+
+	JLabel lblCurrent = new JLabel("");
+	JLabel lblDealCard = new JLabel("");
+	JTextField textFieldPlaceBet = new JTextField();
+	
+	JLabel lblBackgroundImg = new JLabel("");
+	// --- Swing GUI Variables --- //
 	
 	/**
 	 * Create the panel.
@@ -51,40 +78,147 @@ public class playingTable extends JPanel {
 	 */
 	public playingTable() throws IOException {
 		// --- init objects --- //
-		JLabel lblBackgroundImg = new JLabel("");
 		setPanel();
-		setBackgroundImage(lblBackgroundImg);
+		
 		
 		setRoundPlaying();
 		
+		setBackgroundImage(lblBackgroundImg);
 
 	}
 	
 	private void setRoundPlaying(){
 		setBettingPhase();
 		setDealingPhase();
-		setPlayingHandPhase();
-		setSplitHandPhase();
-		setPayingPhase();
+		//setPlayingHandPhase();
+		//setSplitHandPhase();
+		//setPayingPhase();
 	}
 	
 	
 	private void setPanel(){
-		setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		setBounds(100,100,800,600);
 	}
 	
 	private void setBackgroundImage(JLabel img){
-		img.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/tableBG.jpg"));
+
+		img.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/tableBackground.jpg"));
 		img.setBounds(0, 0, 800, 600);
-		add(img);
+		getContentPane().add(img);
 	}
 	
 	private void setBettingPhase(){
+		setBetButtons();
 		displayBetting();
 	}
 	
+	private void setBetButtons(){
+		btnPlaceBets.add(btnPlaceBet1);
+		btnPlaceBets.add(btnPlaceBet2);
+		btnPlaceBets.add(btnPlaceBet3);
+		btnPlaceBets.add(btnPlaceBet4);
+	}
+	
+	private void displayBetting(){
+		int X = 0;
+		int Y = 0;
+		Point2D btnPosition= new Point2D.Double(0, 0);
+		btnPosition = getSeatPosition(0);
+		for(int i=0; i<4;i++){
+			btnPosition = getSeatPosition(i);
+			X = (int)btnPosition.getX();
+			Y = (int)btnPosition.getY();
+			btnPlaceBets.get(i).setForeground(goldColor);
+			btnPlaceBets.get(i).setFont(fontHel20);
+			btnPlaceBets.get(i).setBounds(X, Y, 80, 80);
+			btnPlaceBets.get(i).setContentAreaFilled(false);
+			btnPlaceBets.get(i).setOpaque(false);
+			btnPlaceBets.get(i).setBorder(new EmptyBorder(0, 0, 0, 0));
+			getContentPane().add(btnPlaceBets.get(i));
+			// Place BET
+			actionListenerBet(btnPlaceBets.get(i),X,Y);
+		}
+	}
+	
+	private void actionListenerBet(JButton btnBet,int X,int Y){
+		btnBet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for(int i=0; i<4; i++){
+					btnPlaceBets.get(i).setVisible(false);
+					if(btnPlaceBets.get(i) == btnBet){
+						humanBetPosition = i;
+					}
+				}
+				getContentPane().remove(lblBackgroundImg);
+				
+				textFieldPlaceBet.setForeground(goldColor);
+				textFieldPlaceBet.setHorizontalAlignment(SwingConstants.CENTER);
+				textFieldPlaceBet.setFont(fontHel20);
+				textFieldPlaceBet.setBounds(X, Y, 80, 80);
+				textFieldPlaceBet.setOpaque(false);
+				textFieldPlaceBet.setBorder(new EmptyBorder(0, 0, 0, 0));
+				textFieldPlaceBet.setText("5");
+				textFieldPlaceBet.setEnabled(true);
+				getContentPane().add(textFieldPlaceBet);
+				textFieldPlaceBet.setColumns(10);
+				
+				
+				lblCurrent.setFont(fontHel12);
+				lblCurrent.setHorizontalAlignment(SwingConstants.LEFT);
+				lblCurrent.setForeground(goldColor);
+				lblCurrent.setBounds(X-5, Y-20, 115, 20);
+				lblCurrent.setText("Current: $"+String.valueOf(currentChip));
+				getContentPane().add(lblCurrent);
+				
+				
+				//lblDealCard.setVisible(true);
+				Point2D betPos = getSeatPosition(humanBetPosition);
+				betPos.setLocation(X, Y);
+				displayDealCardOption(betPos);
+				getContentPane().add(lblBackgroundImg);
+			}
+		});
+		btnBet.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnBet.setForeground(new Color(0, 0, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnBet.setForeground(new Color(255, 204, 0));
+			}
+		});
+	}
+	
+	private void actionListenerDeal(){
+		lblDealCard.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				//deal!
+				setHumanBet(textFieldPlaceBet.getText());
+				if(humanBet >= 5){
+					lblDealCard.setVisible(false);
+					textFieldPlaceBet.setEditable(false);
+					textFieldPlaceBet.setText("$ "+String.valueOf(humanBet));
+					getContentPane().remove(lblDealCard);
+					lblCurrent.setVisible(false);
+					getContentPane().requestFocus();
+					updateChip(-humanBet);
+				} else {
+					JOptionPane.showMessageDialog(getContentPane(),"Betting minimum $5","Inane warning",JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+	}
+	
+	
+	
 	private void setDealingPhase(){
+		// ActionListener for Deal
+		actionListenerDeal();
+		
 		/* Display Dealed Cards faceDown for All Players
 		*
 		*displayCardsInHands();
@@ -108,13 +242,6 @@ public class playingTable extends JPanel {
 		
 	}
 	
-	private void displayBetting(){
-		// display BET buttons
-		
-		// place BET
-		
-		// hit deal
-	}
 	
 	
 	private void displayDealCards(ArrayList<Player> player){
@@ -167,6 +294,25 @@ public class playingTable extends JPanel {
 			return -1;
 		}
 		return seat;
+	}
+	
+	private Point2D getSeatPosition(int pos){
+		Point2D temp = new Point2D.Double(0,0);
+		switch(pos){
+		case 0:
+			temp.setLocation(40,380);
+			break;
+		case 1:
+			temp.setLocation(240,470);
+			break;
+		case 2:
+			temp.setLocation(475,470);
+			break;
+		case 3:
+			temp.setLocation(685,380);
+			break;
+		}
+		return temp;
 	}
 	
 	@SuppressWarnings("null")
@@ -253,52 +399,52 @@ public class playingTable extends JPanel {
 				checkCard.setIcon(img);
 				checkCard.setBounds(X, Y, 30, 45);
 				checkCard.setVisible(false);
-				add(checkCard);
+				getContentPane().add(checkCard);
 			} else {
 				ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
 				checkCard.setHorizontalAlignment(SwingConstants.CENTER);
 				checkCard.setIcon(img);
 				checkCard.setBounds(X, Y, 30, 45);
 				checkCard.setVisible(false);
-				add(checkCard);
+				getContentPane().add(checkCard);
 			}
 		}
 	}
 	
 	private void displayDealCardOption(Point2D player){
-		JLabel option = new JLabel();
+		//JLabel option = new JLabel();
 		int X = (int)player.getX();
 		int Y = (int)player.getY();
 		int seat = getSeatNum(player);
 		int lblDealX = 0;
 		int lblDealY = 0;
-		
 			switch(seat){
 			case 0:
 				lblDealX = X+80;
 				lblDealY = Y+50;
 				break;
 			case 1:
-				lblDealX = X+80;
-				lblDealY = Y+45;
+				lblDealX = X+85;
+				lblDealY = Y+35;
 				break;
 			case 2:
-				lblDealX = X-30;
-				lblDealY = Y+45;
+				lblDealX = X-35;
+				lblDealY = Y+35;
 				break;
 			case 3:
 				lblDealX = X-30;
 				lblDealY = Y+50;
 				break;
 			}
+			
 			ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
-			option.setIcon(img);
-			option.setBounds(lblDealX, lblDealY, 30, 45);
-			option.setHorizontalAlignment(SwingConstants.CENTER);
-			option.setOpaque(false);
-			option.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
-			option.setVisible(true);
-			add(option);
+			lblDealCard.setIcon(img);
+			lblDealCard.setBounds(lblDealX, lblDealY, 30, 45);
+			lblDealCard.setHorizontalAlignment(SwingConstants.CENTER);
+			lblDealCard.setOpaque(false);
+			lblDealCard.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
+			lblDealCard.setVisible(true);
+			getContentPane().add(lblDealCard);
 	}
 	
 	private void displayPlayingOptions(ArrayList<JLabel> playingOption,Point2D player){
@@ -359,7 +505,7 @@ public class playingTable extends JPanel {
 				option.setOpaque(false);
 				option.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 				option.setVisible(true);
-				add(option);
+				getContentPane().add(option);
 				break;
 			case "lblSplit":
 				option.setForeground(new Color(255, 204, 0));
@@ -368,7 +514,7 @@ public class playingTable extends JPanel {
 				option.setOpaque(false);
 				option.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 				option.setVisible(true);
-				add(option);
+				getContentPane().add(option);
 				break;
 			case "lblStand":
 				option.setForeground(new Color(255, 204, 0));
@@ -377,11 +523,15 @@ public class playingTable extends JPanel {
 				option.setOpaque(false);
 				option.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 				option.setVisible(true);
-				add(option);
+				getContentPane().add(option);
 				break;
 			}
 		}
 		
+	}
+	
+	private void setHumanBet(String amount){
+		humanBet = Integer.parseInt(amount);
 	}
 	
 	public void setStartChip(int amount){
@@ -402,6 +552,7 @@ public class playingTable extends JPanel {
 		currentChip = amount;
 	}
 	
+	
 	public void updateChip(int amount){
 		currentChip += amount;
 	}
@@ -410,5 +561,10 @@ public class playingTable extends JPanel {
 		int numCards = 2;
 		
 		return numCards;
+	}
+
+	public void setNumCompPlayer(int compPlayerEntered) {
+		numCompPlayers = compPlayerEntered;
+		
 	}
 }

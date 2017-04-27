@@ -38,6 +38,9 @@ public class MainMenu {
 	private String rules = getRules();
 	private int numCompPlayer = 0;
 	private int amountStart = 100;
+	
+	//public tableView table;
+	public playingTable table;
 
 	/**
 	 * Launch the application.
@@ -252,13 +255,13 @@ public class MainMenu {
 				int compPlayerEntered = Integer.parseInt(textFieldSetComp.getText());
 				if(chipEntered > 50 && chipEntered < 100000){
 					frame.dispose();
-					tableView tableWindow;
+					//tableView tableWindow;
 					try {
-						tableWindow = new tableView();
-						tableWindow.setStartChip(chipEntered);
-						tableWindow.setNumCompPlayer(compPlayerEntered);
+						table = new playingTable();
+						table.setCurrentChip(chipEntered);
+						table.setNumCompPlayer(compPlayerEntered);
 												
-						tableWindow.setVisible(true);
+						table.setVisible(true);
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
