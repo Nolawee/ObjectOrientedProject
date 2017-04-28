@@ -138,7 +138,9 @@ public class playingTable extends JFrame {
 			btnPlaceBets.get(i).setBorder(new EmptyBorder(0, 0, 0, 0));
 			getContentPane().add(btnPlaceBets.get(i));
 			// Place BET
+			
 			actionListenerBet(btnPlaceBets.get(i),X,Y);
+		
 		}
 	}
 	
@@ -163,7 +165,6 @@ public class playingTable extends JFrame {
 				textFieldPlaceBet.setEnabled(true);
 				getContentPane().add(textFieldPlaceBet);
 				textFieldPlaceBet.setColumns(10);
-				
 				
 				lblCurrent.setFont(fontHel12);
 				lblCurrent.setHorizontalAlignment(SwingConstants.LEFT);
