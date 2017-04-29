@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.persistence.Entity;
+
 /*
  * Implement Serializable for writing/loading 
  * (Unless we learn a better way to do this during lecture)
  */
+@Entity
 public class Table implements Serializable {
     private ArrayList<Player> players; 
     private Stack<Player> brokePlayers; //Keeps track of losing players. At the end of a game, repeatedly "pop" to get Players back in order of 1st place, 2nd place, etc...
