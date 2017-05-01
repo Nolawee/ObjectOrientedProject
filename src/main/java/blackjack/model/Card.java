@@ -5,18 +5,18 @@ public class Card {
 	private String suit;
 	private boolean isFaceUp = false;
 	
-	final static int JACK = 11;
-	final static int QUEEN = 12;
-	final static int KING = 13;
-	final static int ACE = 1;
+	public final static int JACK = 11;
+	public final static int QUEEN = 12;
+	public final static int KING = 13;
+	public final static int ACE = 1;
 	
-	final static String DIAMONDS = "diamond";
-	final static String CLUBS = "club";
-	final static String HEARTS = "heart";
-	final static String SPADES = "spade";
+	public final static String DIAMONDS = "diamond";
+	public final static String CLUBS = "club";
+	public final static String HEARTS = "heart";
+	public final static String SPADES = "spade";
 	
-	final static String BLACK = "black";
-	final static String RED = "red";
+	public final static String BLACK = "black";
+	public final static String RED = "red";
 			
 	
 	public Card(int num, String suit) throws Exception {
