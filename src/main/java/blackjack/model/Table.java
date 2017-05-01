@@ -4,11 +4,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /*
  * Implement Serializable for writing/loading 
  * (Unless we learn a better way to do this during lecture)
  */
+@Entity
 public class Table implements Serializable {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int game_id;
     private ArrayList<Player> players; 
     private Stack<Player> brokePlayers; //Keeps track of losing players. At the end of a game, repeatedly "pop" to get Players back in order of 1st place, 2nd place, etc...
     private Dealer dealer;
