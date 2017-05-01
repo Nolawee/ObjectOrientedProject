@@ -23,7 +23,7 @@
         <!-- Drop the existing tables and create new one -->
         <property name="hibernate.hbm2ddl.auto">update</property>
         
-        <mapping class="com.gontuseries.hibernate.Student_Info"/>
+        <mapping class="com.gontuseries.hibernate.Table"/>
         
     </session-factory>
 
