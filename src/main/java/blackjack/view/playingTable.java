@@ -27,19 +27,11 @@ import java.awt.geom.Point2D;
 
 @SuppressWarnings("serial")
 public class playingTable extends JFrame {
-	private HumanPlayer humanPlayer;
-	private ComputerPlayer computerPlayer;
-	private Dealer dealer;
-	private Deck deck;
-	private Card[] cards;
-	private Chips chips;
-	private Table table;
-	private State state;
-	private TurnManager turnManager;
-	private BettingPhase bettingPhase;
-	private DealerHandPhase dealerHandPhase;
-	private PlayHandPhase playHandPhase;
-	private SplitHandPhase splitHandPhase;
+	TurnManager turnManager;
+	BettingPhase bettingPhase;
+	DealerHandPhase dealerHandPhase;
+	PlayHandPhase playHandPhase;
+	SplitHandPhase splitHandPhase;
 	
 	
 	private Point2D humanPosition;
@@ -51,6 +43,14 @@ public class playingTable extends JFrame {
 	private int currentChip;
 	private int numCompPlayers;
 	private int numPlayers;
+	
+	private Point2D dealerPosition = new Point2D.Double(350,130);
+	
+	Player humanPlayer;
+	ArrayList<Player> players;
+	Dealer dealer;
+	Table table;
+	
 	
 	// --- Font Style --- //
 	Color goldColor = new Color(255,204,0);
@@ -70,6 +70,10 @@ public class playingTable extends JFrame {
 	JTextField textFieldPlaceBet = new JTextField();
 	
 	JLabel lblBackgroundImg = new JLabel("");
+	
+	ArrayList<JLabel> lblCardsOnTable = new ArrayList<JLabel>();
+	ArrayList<JLabel> lblPlayingOptions = new ArrayList<JLabel>();
+	
 	// --- Swing GUI Variables --- //
 	
 	/**
@@ -90,9 +94,8 @@ public class playingTable extends JFrame {
 	private void setRoundPlaying(){
 		setBettingPhase();
 		setDealingPhase();
-		//setPlayingHandPhase();
+		setPlayingHandPhase();
 		//setSplitHandPhase();
-		//setPayingPhase();
 	}
 	
 	
@@ -219,38 +222,98 @@ public class playingTable extends JFrame {
 	private void setDealingPhase(){
 		// ActionListener for Deal
 		actionListenerDeal();
+		displayDealCards();
+		for(int i=0; i< lblCardsOnTable.size();i++){
+			actionListenerRevealCard(lblCardsOnTable.get(i));
+		}
 		
-		/* Display Dealed Cards faceDown for All Players
-		*
-		*displayCardsInHands();
-		*
-		*/
-		//displayDealCards();
 	}
 	
 	private void setPlayingHandPhase(){
-		// due to actionlisteners
-		// if user hit reveal cars,
-		revealCard(humanPlayer);
-		//revealCard()
+		if(humanPlayer.isPlaying()){
+			displayPlayingOptions(); //human playing option
+			actionListenerPlayingHand();
+		}
 	}
 	
+	/*
 	private void setSplitHandPhase(){
 		
-	}
+	}*/
 	
 	private void setPayingPhase(){
+		displayRoundResult();
+	}
+	
+	
+	
+	private void displayDealCards(){
+		for(int i=0; i < playerPosition.size(); i++){
+			displayCardsInHand(playerPosition.get(i),players.get(i),false);
+		}
+		displayCardsInHand(dealerPosition,dealer,true);
+	}
+	
+	private void actionListenerRevealCard(JLabel lblCardOnTable){
+		lblCardOnTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblCardOnTable.setForeground(new Color(0, 0, 0));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblCardOnTable.setForeground(new Color(255, 204, 0));
+			}
+			@Override
+			public void mouseClicked(MouseEvent e){
+				revealCard();
+			}
+		});
 		
 	}
 	
-	
-	
-	private void displayDealCards(ArrayList<Player> player){
-		//displayCardsInHand(player,false);
+	private void revealCard(){
+		for(int i=0; i < playerPosition.size(); i++){
+			displayCardsInHand(playerPosition.get(i),players.get(i),true);
+		}
+		displayCardsInHand(dealerPosition,dealer,true);
 	}
 	
-	private void revealCard(Player player){
-		//displayCardsInHand(player,true);
+	private void actionListenerPlayingHand(){
+		for(int i=0 ; i< lblPlayingOptions.size();i++){
+			JLabel option = lblPlayingOptions.get(i);
+			option.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					option.setForeground(new Color(0, 0, 0));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					option.setForeground(new Color(255, 204, 0));
+				}
+				@Override
+				public void mouseClicked(MouseEvent e){
+					switch(option.getName()){
+					case "lblDealCard":
+						//call deal card and reveal it
+						revealCard();
+						break;
+					case "lblSplit":
+						break;
+					case "Stand":
+						setPayingPhase();
+						break;
+					}
+				}
+			});
+			
+		}
+	}
+	
+	private void displayRoundResult(){
+		//just display human result
+		JLabel result = new JLabel();
+		
 	}
 	
 	private void setPosition(int pos,Point2D player){
@@ -316,10 +379,9 @@ public class playingTable extends JFrame {
 		return temp;
 	}
 	
-	@SuppressWarnings("null")
 	private void setCompPosition(Point2D human, ArrayList<Point2D> comp){
 		int humanSeat = getSeatNum(human);
-		Point2D tempLocation = null;
+		Point2D tempLocation = new Point2D.Double(0,0);
 		int comPlayers = 0;
 		int seating = 0;
 		while(comPlayers < numCompPlayers){
@@ -383,12 +445,12 @@ public class playingTable extends JFrame {
 	
 	
 	
-	private void displayCardsInHand(Point2D player,ArrayList<Card> hand,ArrayList<JLabel> cardsInHand,boolean isFaceUp){
+	private void displayCardsInHand(Point2D player,Player players,boolean isFaceUp){
 		JLabel checkCard = new JLabel();
 		Point2D cardLoc = player;
+		ArrayList<Card> cardsInHand = players.getHand();
 		for(int i=0; i<cardsInHand.size();i++){
-			checkCard = cardsInHand.get(i);
-			Card card = hand.get(i);
+			Card card = cardsInHand.get(i);
 			cardLoc = cardInHandPosition(cardLoc);
 			int X = (int)cardLoc.getX()+i*15;
 			int Y = (int)cardLoc.getY();
@@ -399,16 +461,17 @@ public class playingTable extends JFrame {
 				checkCard.setHorizontalAlignment(SwingConstants.CENTER);
 				checkCard.setIcon(img);
 				checkCard.setBounds(X, Y, 30, 45);
-				checkCard.setVisible(false);
-				getContentPane().add(checkCard);
+				checkCard.setVisible(true);
+				//getContentPane().add(checkCard);
 			} else {
 				ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
 				checkCard.setHorizontalAlignment(SwingConstants.CENTER);
 				checkCard.setIcon(img);
 				checkCard.setBounds(X, Y, 30, 45);
-				checkCard.setVisible(false);
+				checkCard.setVisible(true);
 				getContentPane().add(checkCard);
 			}
+			lblCardsOnTable.add(checkCard);
 		}
 	}
 	
@@ -448,11 +511,11 @@ public class playingTable extends JFrame {
 			getContentPane().add(lblDealCard);
 	}
 	
-	private void displayPlayingOptions(ArrayList<JLabel> playingOption,Point2D player){
+	private void displayPlayingOptions(){
 		JLabel option = new JLabel();
-		int X = (int)player.getX();
-		int Y = (int)player.getY();
-		int seat = getSeatNum(player);
+		int X = (int)humanPosition.getX();
+		int Y = (int)humanPosition.getY();
+		int seat = humanBetPosition;
 		int lblDealX = 0;
 		int lblDealY = 0;
 		int lblSplitX = 0;
@@ -460,9 +523,16 @@ public class playingTable extends JFrame {
 		int lblStandX = 0;
 		int lblStandY = 0;
 		ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
+		JLabel lblDealCard = new JLabel();
+		JLabel lblSplit = new JLabel();
+		JLabel lblStand = new JLabel();
 		
-		for(int i=0; i< playingOption.size();i++){
-			option = playingOption.get(i);
+		lblPlayingOptions.add(lblDealCard);
+		lblPlayingOptions.add(lblSplit);
+		lblPlayingOptions.add(lblStand);
+		
+		for(int i=0; i< lblPlayingOptions.size();i++){
+			option = lblPlayingOptions.get(i);
 			switch(seat){
 				case 0:
 					lblDealX = X+80;
@@ -533,6 +603,7 @@ public class playingTable extends JFrame {
 	
 	private void setHumanBet(String amount){
 		humanBet = Integer.parseInt(amount);
+
 	}
 	
 	public void setStartChip(int amount){
