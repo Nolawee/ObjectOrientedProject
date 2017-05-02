@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -13,12 +15,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import blackjack.model.*;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -34,12 +39,15 @@ public class MainMenu {
 	private JPanel panelHelp;
 	private JTextField textFieldSetChip;
 	private JTextField textFieldSetComp;
-	private JTextField textFieldRules;
-	private String rules = getRules();
+	private JTextArea textFieldRules;
+	private JScrollPane scroll;
+	private JButton btnMainMenuHelp;
+	private String rules;
 	private int numCompPlayer = 0;
 	private int amountStart = 100;
-	private playingTable table;
+	private playingTable tableView;
 
+	Table table;
 	/**
 	 * Launch the application.
 	 */
@@ -140,6 +148,10 @@ public class MainMenu {
 		JButton btnHelp = new JButton("Help");
 		btnHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				rules = getRules();
+				textFieldRules.setText(rules);
+				//System.out.println(scroll.getComponentZOrder(panelHelp));
+				//System.out.println(textFieldRules.getComponentZOrder(panelHelp));
 				panelHelp.setVisible(true);
 				panelMainMenu.setVisible(false);
 			}
@@ -255,13 +267,10 @@ public class MainMenu {
                     frame.dispose();
                     //tableView tableWindow;
                     try {
-                        table = new playingTable();
-                        table.setCurrentChip(chipEntered);
-                        table.setNumCompPlayer(compPlayerEntered);
+                        tableView = new playingTable(chipEntered,compPlayerEntered);
                         
-                        table.setVisible(true);
+                        tableView.setVisible(true);
                     } catch (IOException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
 				}
@@ -300,7 +309,7 @@ public class MainMenu {
 		lblBlackJackLoadGame.setFont(new Font("Helvetica", Font.ITALIC, 65));
 		panelLoadGame.add(lblBlackJackLoadGame);
 		
-		JList listSavedGame = new JList();
+		JList<Object> listSavedGame = new JList<Object>();
 		listSavedGame.setForeground(new Color(255, 204, 0));
 		listSavedGame.setBounds(150, 200, 500, 200);
 		listSavedGame.setOpaque(false);
@@ -318,6 +327,7 @@ public class MainMenu {
 		btnLoadLoadGame.setBorderPainted(true);
 		btnLoadLoadGame.setBorder(BorderFactory.createLineBorder(new Color(255,204,0), 2));
 		btnLoadLoadGame.setBounds(200, 450, 180, 60);
+		
 		panelLoadGame.add(btnLoadLoadGame);
 		
 		JButton btnMainMenuLoadGame = new JButton("Main Menu");
@@ -345,21 +355,25 @@ public class MainMenu {
 		label.setFont(new Font("Helvetica", Font.ITALIC, 65));
 		panelHelp.add(label);
 		
-		textFieldRules = new JTextField();
-		textFieldRules.setHorizontalAlignment(SwingConstants.LEFT);
+		textFieldRules = new JTextArea();
 		//textFieldRules.setText("This is rules.");
-		textFieldRules.setText(rules);
+		//textFieldRules.setText(rules);
 		textFieldRules.setEditable(false);
 		textFieldRules.setOpaque(false);
-		textFieldRules.setFont(new Font("Helvetica",Font.PLAIN,26));
+		textFieldRules.setLineWrap(true);
+		textFieldRules.setFont(new Font("Helvetica",Font.PLAIN,15));
 		textFieldRules.setForeground(new Color(255,204,0));
 		Border emptyTextFieldRules = new EmptyBorder(10,10,10,10);
 		textFieldRules.setBorder(BorderFactory.createCompoundBorder(lined,emptyTextFieldRules));
 		textFieldRules.setBounds(100, 130, 600, 320);
 		panelHelp.add(textFieldRules);
-		textFieldRules.setColumns(10);
 		
-		JButton btnMainMenuHelp = new JButton("Main Menu");
+		/*scroll = new JScrollPane ( textFieldRules );
+	    scroll.setVerticalScrollBarPolicy ( ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS );
+	    */
+	    //panelHelp.add(scroll);
+	    
+		btnMainMenuHelp = new JButton("Main Menu");
 		btnMainMenuHelp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				panelMainMenu.setVisible(true);
@@ -385,13 +399,13 @@ public class MainMenu {
 	
 	//----Helper methods--------------------------------------------------------------------------------
     
-    public static String getRules() {
+	public static String getRules() {
         String rules = "No rules here! Was there an error?";
-        try {
-            rules = new String(Files.readAllBytes(Paths.get("./src/main/resources/BlackjackRules.txt")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return rules;
+            try {
+				rules = new String(Files.readAllBytes(Paths.get("../src/main/resources/BlackjackRules.txt")));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return rules;
     }
 }

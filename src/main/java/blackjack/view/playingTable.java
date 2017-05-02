@@ -39,16 +39,16 @@ public class playingTable extends JFrame {
 	private final ArrayList<Point2D> playerPosition = new ArrayList<Point2D>();
 	private int humanBet;
 	private int humanBetPosition;
-	private int startChip;
 	private int currentChip;
 	private int numCompPlayers;
 	private int numPlayers;
 	
 	private Point2D dealerPosition = new Point2D.Double(350,130);
 	
-	Player humanPlayer;
-	ArrayList<Player> players;
-	Dealer dealer;
+	Player humanPlayer = new HumanPlayer("Jesus",currentChip);
+	ArrayList<Player> players = new ArrayList<Player>();
+	
+	Dealer dealer = new Dealer();
 	Table table;
 	
 	
@@ -80,10 +80,14 @@ public class playingTable extends JFrame {
 	 * Create the panel.
 	 * @throws IOException 
 	 */
-	public playingTable() throws IOException {
+
+	public playingTable(int currentChip,int numComp) throws IOException {
 		// --- init objects --- //
+		setCurrentChip(currentChip);
+		setNumCompPlayer(numComp);
+		players.add(humanPlayer);
+		table = new Table(players,dealer);
 		setPanel();
-		
 		
 		setRoundPlaying();
 		
@@ -91,10 +95,12 @@ public class playingTable extends JFrame {
 
 	}
 	
+	
+	
 	private void setRoundPlaying(){
 		setBettingPhase();
 		setDealingPhase();
-		setPlayingHandPhase();
+		//setPlayingHandPhase();
 		//setSplitHandPhase();
 	}
 	
@@ -107,7 +113,7 @@ public class playingTable extends JFrame {
 	
 	private void setBackgroundImage(JLabel img){
 
-		img.setIcon(new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/tableBackground.jpg"));
+		img.setIcon(new ImageIcon("../images/tableBackground.jpg"));
 		img.setBounds(0, 0, 800, 600);
 		getContentPane().add(img);
 	}
@@ -312,7 +318,7 @@ public class playingTable extends JFrame {
 	
 	private void displayRoundResult(){
 		//just display human result
-		JLabel result = new JLabel();
+		//JLabel result = new JLabel();
 		
 	}
 	
@@ -464,7 +470,7 @@ public class playingTable extends JFrame {
 				checkCard.setVisible(true);
 				//getContentPane().add(checkCard);
 			} else {
-				ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
+				ImageIcon img = new ImageIcon("../images/cards/backCard.png");
 				checkCard.setHorizontalAlignment(SwingConstants.CENTER);
 				checkCard.setIcon(img);
 				checkCard.setBounds(X, Y, 30, 45);
@@ -501,7 +507,7 @@ public class playingTable extends JFrame {
 				break;
 			}
 			
-			ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
+			ImageIcon img = new ImageIcon("../images/cards/backCard.png");
 			lblDealCard.setIcon(img);
 			lblDealCard.setBounds(lblDealX, lblDealY, 30, 45);
 			lblDealCard.setHorizontalAlignment(SwingConstants.CENTER);
@@ -522,7 +528,7 @@ public class playingTable extends JFrame {
 		int lblSplitY = 0;
 		int lblStandX = 0;
 		int lblStandY = 0;
-		ImageIcon img = new ImageIcon("/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/backCard.png");
+		ImageIcon img = new ImageIcon("../images/cards/backCard.png");
 		JLabel lblDealCard = new JLabel();
 		JLabel lblSplit = new JLabel();
 		JLabel lblStand = new JLabel();
@@ -614,7 +620,7 @@ public class playingTable extends JFrame {
 	
 	public String getCardImage(Card card){
 		String image = card.getNumber()+"_of_"+card.getSuit()+"s.png";
-		String root = "/Users/trsteve/Dropbox/SPR2017/CSCI4448/ObjectOrientedProject/src/main/java/blackjack/view/images/cards/";
+		String root = "../images/cards/";
 		String imagePath = root+image;
 		
 		return imagePath;
@@ -623,7 +629,9 @@ public class playingTable extends JFrame {
 	public void setCurrentChip(int amount){
 		currentChip = amount;
 	}
-	
+	public int getCurrentChip(){
+		return currentChip;
+	}
 	
 	public void updateChip(int amount){
 		currentChip += amount;
@@ -638,5 +646,8 @@ public class playingTable extends JFrame {
 	public void setNumCompPlayer(int compPlayerEntered) {
 		numCompPlayers = compPlayerEntered;
 		
+	}
+	public int getNumCompPlayer(){
+		return numCompPlayers;
 	}
 }

@@ -1,0 +1,3 @@
+
+#This file only exists to keep "src/test/java" a dir in our repo, for now.
+!.gitignore
